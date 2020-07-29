@@ -1,29 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <odoo>
-  <data>
-    
-    <!-- Top menu item -->
+  <data>   
+    <!-- explicit list tree view definition -->
 
-    <menuitem name="Academy" id="academy.menu_root" web_icon ="academy,static/description/icon.png" sequence="0"/>
-
-    <!-- menu categories -->
-
-    <menuitem name="Menu 1" id="academy.menu_1" parent="academy.menu_root"/>
-    <menuitem name="Menu 2" id="academy.menu_2" parent="academy.menu_root"/>
-    <menuitem name="School Form" id="academy.menu_3" parent="academy.menu_root" action="academy.action_window"/>
-
-    <!-- actions -->
-
-    <menuitem name="List" id="academy.menu_1_list" parent="academy.menu_1"
-              action="academy.action_window"/>
-
-    <menuitem name="Server to list" id="academy" parent="academy.menu_2"
-              action="academy.action_server"/>
-
-    
-    <!-- explicit list view definition -->
-
-    <record model="ir.ui.view" id="academy.list">
-      <field name="name">academy list</field>
+    <record model="ir.ui.view" id="academy_list">
+      <field name="name">academy.list</field>
       <field name="model">academy.academy</field>
       <field name="arch" type="xml">
         <tree>
@@ -34,51 +16,87 @@
       </field>
     </record>
 
+    <!-- form view defintion -->
+    <record model="ir.ui.view" id="academy_form">
+      <field name="name">academy.form</field>
+      <field name="model">academy.academy</field>
+      <field name="arch" type="xml">
+        <form string ="math form">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="value"/>
+              <field name ="value2"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
-    <!-- actions opening views on models -->
-
-    <record model="ir.actions.act_window" id="academy.action_window">
-      <field name="name">academy window</field>
+    <!-- action for tree and form view-->
+    <record id="action_academy_academy" model="ir.actions.act_window">
+      <field name="name">Academy Main Menu</field>
+      <field name="type">ir.actions.act_window</field>
       <field name="res_model">academy.academy</field>
       <field name="view_mode">tree,form</field>
     </record>
+    <!-- actions opening views on models -->
 
-    <!-- ATEMPT TO ADD SCHOOL VIEW TO SCHOOL
-       <record model="ir.ui.view" id="school.list">
-      <field name="name">school list</field>
+    <!-- ADD SCHOOL VIEW TO SCHOOL-->
+    <record id="student" model="ir.ui.view" >
+      <field name="name">Students</field>
       <field name="model">school.student</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
           <field name="age"/>
           <field name="guardian"/>
- 
         </tree>
       </field>
-    </record> 
+    </record>
 
-    <record model="ir.actions.act_window" id="school.action_window">
+    <!-- action-->
+    <record id="action_school_student" model="ir.actions.act_window" >
       <field name="name">school window</field>
       <field name="res_model">school.student</field>
       <field name="view_mode">tree</field>
     </record> -->
 
-    <!-- server action to the one above -->
-
-    <record model="ir.actions.server" id="academy.action_server">
-      <field name="name">academy server</field>
-      <field name="model_id" ref="model_academy_academy"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
 
 
+    <!-- Top menu item -->
+
+    <menuitem id="academy_menu_root"
+        name="Academy"  
+        web_icon ="academy,static/description/icon.png" 
+        sequence="0"/>
+
+    <!-- menu categories -->
+
+    <menuitem id="academy_menu_1" 
+        name="Menu 1" 
+        parent="academy_menu_root"/>
+
+    <menuitem id="academy_menu_2" 
+        name="Menu 2"  
+        parent="academy_menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem id="academy_menu_1_list"
+        name="List"  
+        parent="academy_menu_1"
+        action="academy.action_academy_academy"/>
+
+    <menuitem id="academy_menu_server"
+        name="Server to list"  
+        parent="academy_menu_2"
+        action="academy.action_academy_academy"/>
+
+    <menuitem id="academy_menu_3"
+        name="School Form"  
+        parent="academy_menu_root" 
+        action="academy.action_school_student"/>
 
   </data>
 </odoo>
