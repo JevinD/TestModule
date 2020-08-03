@@ -24,6 +24,12 @@ class academy(models.Model):
         string="Topic",
         required="True",
     )
+    create_date = fields.Datetime(
+        string="Creation Date",
+        readonly=True,
+        index=True,
+        help="Date on which the task report is created.",
+    )
     value = fields.Integer()
     value2 = fields.Float(compute="_value_pc", store=True)
     description = fields.Text(required="True")
