@@ -21,7 +21,7 @@
       <field name="name">academy.form</field>
       <field name="model">academy.academy</field>
       <field name="arch" type="xml">
-        <form string ="math form">
+        <form string ="Task form">
           <sheet>
             <group>
               <field name="day"/>
