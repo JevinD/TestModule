@@ -18,6 +18,12 @@ class academy(models.Model):
         string="Day",
         required="True",
     )
+
+    section = fields.Selection(
+        [("github", "Github"), ("odoo programming", "Odoo Programming")],
+        string="Topic",
+        required="True",
+    )
     value = fields.Integer()
     value2 = fields.Float(compute="_value_pc", store=True)
     description = fields.Text(required="True")
