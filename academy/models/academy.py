@@ -7,10 +7,20 @@ class academy(models.Model):
     _name = "academy.academy"
     _description = "academy.academy"
 
-    name = fields.Char()
+    day = fields.Selection(
+        [
+            ("monday", "Monday"),
+            ("tuesday", "Tuesday"),
+            ("wednesday", "Wednesday"),
+            ("thursday", "Thursday"),
+            ("friday", "Friday"),
+        ],
+        string="Day",
+        required="True",
+    )
     value = fields.Integer()
     value2 = fields.Float(compute="_value_pc", store=True)
-    description = fields.Text()
+    description = fields.Text(required="True")
 
     @api.depends("value")
     def _value_pc(self):

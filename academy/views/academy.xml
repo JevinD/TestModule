@@ -9,8 +9,8 @@
       <field name="model">academy.academy</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="value"/>
+          <field name="day"/>
+          <field name="description"/>
           <field name="value2"/>
         </tree>
       </field>
@@ -24,10 +24,13 @@
         <form string ="math form">
           <sheet>
             <group>
-              <field name="name"/>
-              <field name="value"/>
+              <field name="day"/>
+              <field name="description"/>
               <field name ="value2"/>
             </group>
+          </sheet>
+          <sheet>
+            <field name ="value2"/>
           </sheet>
         </form>
       </field>
@@ -43,15 +46,35 @@
     <!-- actions opening views on models -->
 
     <!-- ADD SCHOOL VIEW TO SCHOOL-->
-    <record id="student" model="ir.ui.view" >
+    <record id="student_list" model="ir.ui.view" >
       <field name="name">Students</field>
       <field name="model">school.student</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="age"/>
-          <field name="guardian"/>
+            <field name="name"/>
+            <field name="age"/>
+            <field name="guardian"/>
+            <field name="note"/>
+            <field name="gender"/>
         </tree>
+      </field>
+    </record>
+
+    <record id="student_form" model="ir.ui.view" >
+      <field name="name">student.form</field>
+      <field name="model">school.student</field>
+      <field name="arch" type="xml">
+        <form string="student form">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="age"/>
+              <field name="guardian"/>
+              <field name="note"/>
+              <field name="gender"/>
+            </group>
+          </sheet>
+        </form>
       </field>
     </record>
 
@@ -59,10 +82,8 @@
     <record id="action_school_student" model="ir.actions.act_window" >
       <field name="name">school window</field>
       <field name="res_model">school.student</field>
-      <field name="view_mode">tree</field>
-    </record> -->
-
-
+      <field name="view_mode">tree,form</field>
+    </record>
 
     <!-- Top menu item -->
 
@@ -73,30 +94,28 @@
 
     <!-- menu categories -->
 
-    <menuitem id="academy_menu_1" 
-        name="Menu 1" 
+    <menuitem id="academy_menu_school" 
+        name="School" 
         parent="academy_menu_root"/>
 
-    <menuitem id="academy_menu_2" 
-        name="Menu 2"  
-        parent="academy_menu_root"/>
+
 
     <!-- actions -->
+    <menuitem id="academy_menu_student" 
+        name="Student"  
+        parent="academy_menu_school"
+        action="academy.action_school_student"/>
 
-    <menuitem id="academy_menu_1_list"
-        name="List"  
-        parent="academy_menu_1"
+    <menuitem id="academy_menu_major"
+        name="Major"  
+        parent="academy_menu_school"
         action="academy.action_academy_academy"/>
 
     <menuitem id="academy_menu_server"
-        name="Server to list"  
-        parent="academy_menu_2"
+        name="Courses"  
+        parent="academy_menu_school"
         action="academy.action_academy_academy"/>
 
-    <menuitem id="academy_menu_3"
-        name="School Form"  
-        parent="academy_menu_root" 
-        action="academy.action_school_student"/>
 
   </data>
 </odoo>
