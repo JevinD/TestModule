@@ -9,6 +9,7 @@
       <field name="model">academy.academy</field>
       <field name="arch" type="xml">
         <tree>
+          <field name="create_date"/>
           <field name="day"/>
           <field name="description"/>
           <field name="section"/>
