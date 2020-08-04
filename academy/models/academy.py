@@ -5,6 +5,7 @@ from odoo import models, fields, api
 
 class academy(models.Model):
     _name = "academy.academy"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "academy.academy"
 
     day = fields.Selection(

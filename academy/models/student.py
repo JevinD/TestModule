@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class SchoolStudent(models.Model):
     _name = "school.student"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Student Table"
 
     name = fields.Char(string="Name", required=True)
