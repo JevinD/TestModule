@@ -7,7 +7,7 @@ class SchoolStudent(models.Model):
     _description = "Student Table"
 
     name = fields.Char(string="Name", required=True)
-    age = fields.Integer(string="Age")
+    age = fields.Integer(string="Age", default="18")
     guardian = fields.Char(string="Guardian")
     note = fields.Text(string="Notes")
     gender = fields.Selection(
