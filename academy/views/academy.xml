@@ -36,7 +36,7 @@
 
     <!-- action for tree and form view-->
     <record id="action_academy_academy" model="ir.actions.act_window">
-      <field name="name">Academy Main Menu</field>
+      <field name="name">Academy.Main.Menu</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">academy.academy</field>
       <field name="view_mode">tree,form</field>
@@ -64,12 +64,19 @@
       <field name="arch" type="xml">
         <form string="student form">
           <sheet>
-            <group>
-              <field name="name"/>
-              <field name="age"/>
-              <field name="guardian"/>
-              <field name="note"/>
-              <field name="gender"/>
+            <group colspan="4">
+              <group colspan="2" col="2">
+                <seperator string="Student" colspan="2"/>
+                  <field name="name"/>
+                  <field name="age"/>
+                  <field name="gender"/>
+              </group>
+
+              <group colspan="2" col="2">
+                <seperator string="Parent/Guardian" colspan="2"/>
+                  <field name="guardian"/>
+                  <field name="note"/>
+              </group>
             </group>
           </sheet>
           <div class="oe_chatter">
@@ -83,7 +90,7 @@
 
     <!-- action-->
     <record id="action_school_student" model="ir.actions.act_window" >
-      <field name="name">school window</field>
+      <field name="name">Student</field>
       <field name="res_model">school.student</field>
       <field name="view_mode">tree,form</field>
     </record>
