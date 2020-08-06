@@ -13,8 +13,6 @@
         name="School" 
         parent="academy_menu_root"/>
 
-
-
     <!-- actions -->
     <menuitem id="academy_menu_student" 
         name="Student"  
@@ -30,5 +28,10 @@
         name="Courses"  
         parent="academy_menu_school"
         action="academy.action_academy_academy"/>
+<!--
+    <menuitem id="academy_menu_session" name="Sessions"
+        parent="academy_menu_school"
+            action="academy.action_academy_session"/>
+            -->
     </data>
 </odoo>
