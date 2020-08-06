@@ -7,12 +7,15 @@ class SchoolStudent(models.Model):
     _description = "Student Table"
 
     name = fields.Char(string="Name", required=True)
-    age = fields.Integer(string="Age", default="18")
-    guardian = fields.Char(string="Guardian")
-    note = fields.Text(string="Notes")
+    age = fields.Integer(string="Age", default="18", required=True)
+    guardian = fields.Selection(
+        [("dad", "Dad"), ("mom", "Mom"),], string="Guardian", required=True
+    )
+    allergy = fields.Text(string="Allergies")
     gender = fields.Selection(
         [("male", "Male"), ("female", "Female"), ("other", "Other"),],
         string="Gender",
         default="male",
+        required=True,
     )
-    image = fields.Binary(string="Image")
+    image = fields.Binary("Image")

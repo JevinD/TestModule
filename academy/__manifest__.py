@@ -20,6 +20,7 @@
     # always loaded
     "data": [
         "security/ir.model.access.csv",
+        "views/academy_menu.xml",
         "views/academy.xml",
         "views/templates.xml",
     ],
