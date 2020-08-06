@@ -50,13 +50,13 @@
 
     <!-- action-->
     <record id="action_academy_academy" model="ir.actions.act_window">
-      <field name="name">Academy.Main.Menu</field>
+      <field name="name">Academy.Academy</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">academy.academy</field>
       <field name="view_mode">tree,form</field>
       <field name="help" type="html">
         <p class="o_view_nocontent_smiling_face">
-          Create your First Major!
+          TEST PAGE!
         </p>
       </field>
     </record>
@@ -149,11 +149,91 @@
             </field>
         </record>
         
-        <record model="ir.actions.act_window" id="action_academy_session">
+        <record id="action_academy_session" model="ir.actions.act_window" >
             <field name="name">Sessions</field>
             <field name="res_model">academy.session</field>
             <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create your Session!
+              </p>
+        </field>
         </record>
+<!--____________________________________MAJOR VIEWS_________________________________-->
+<record id="major_list_view" model="ir.ui.view" >
+      <field name="name">Major</field>
+      <field name="model">academy.major</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="major"/>
+          <field name="degreeType"/>
+        </tree>
+      </field>
+    </record>
+
+        <record id="major_form_view" model="ir.ui.view">
+            <field name="name">major.form</field>
+            <field name="model">academy.major</field>
+            <field name="arch" type="xml">
+                <form string="Major Form">
+                    <sheet>
+                        <group>
+                          <field name="major"/>
+                          <field name="degreeType"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_academy_major" model="ir.actions.act_window" >
+            <field name="name">Major</field>
+            <field name="res_model">academy.major</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Add a Major!
+              </p>
+            </field>
+        </record>  
+<!--____________________________________Course VIEWS_________________________________-->
+
+        <record id="course_list_view" model="ir.ui.view" >
+      <field name="name">Course</field>
+      <field name="model">academy.course</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="course"/>
+        </tree>
+      </field>
+    </record>
+
+        <record id="course_form_view" model="ir.ui.view">
+            <field name="name">course.form</field>
+            <field name="model">academy.course</field>
+            <field name="arch" type="xml">
+                <form string="Course Form">
+                    <sheet>
+                        <group>
+                          <field name="course"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_academy_course" model="ir.actions.act_window" >
+            <field name="name">Course</field>
+            <field name="res_model">academy.course</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Add your Course!
+              </p>
+            </field>
+        </record>  
+
+
     <!-- Top menu item -->
 
     <menuitem id="academy_menu_root"
@@ -167,6 +247,10 @@
         name="School" 
         parent="academy_menu_root"/>
 
+    <menuitem id="academy_menu_academy" 
+        name="Test" 
+        parent="academy_menu_root"/>
+
     <!-- actions -->
     <menuitem id="academy_menu_student" 
         name="Student"  
@@ -176,16 +260,20 @@
     <menuitem id="academy_menu_major"
         name="Major"  
         parent="academy_menu_school"
-        action="academy.action_academy_academy"/>
+        action="academy.action_academy_major"/>
 
-    <menuitem id="academy_menu_server"
+    <menuitem id="academy_menu_course"
         name="Courses"  
         parent="academy_menu_school"
-        action="academy.action_academy_academy"/>
-
+        action="academy.action_academy_course"/>
+        
     <menuitem id="academy_menu_session" name="Sessions"
-        parent="academy_menu_school"
+        parent="academy_menu_academy"
             action="academy.action_academy_session"/>
+
+    <menuitem id="academy_menu_no_clue" name="No Clue"
+        parent="academy_menu_academy"
+        action="academy.action_academy_academy"/>
 
   </data>
 </odoo>

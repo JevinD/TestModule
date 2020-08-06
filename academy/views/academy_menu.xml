@@ -1,37 +1,5 @@
 <odoo>
     <data>    
-    <!-- Top menu item -->
 
-    <menuitem id="academy_menu_root"
-        name="Academy"  
-        web_icon ="academy,static/description/icon.png" 
-        sequence="0"/>
-
-    <!-- menu categories -->
-
-    <menuitem id="academy_menu_school" 
-        name="School" 
-        parent="academy_menu_root"/>
-
-    <!-- actions -->
-    <menuitem id="academy_menu_student" 
-        name="Student"  
-        parent="academy_menu_school"
-        action="academy.action_school_student"/>
-
-    <menuitem id="academy_menu_major"
-        name="Major"  
-        parent="academy_menu_school"
-        action="academy.action_academy_academy"/>
-
-    <menuitem id="academy_menu_server"
-        name="Courses"  
-        parent="academy_menu_school"
-        action="academy.action_academy_academy"/>
-<!--
-    <menuitem id="academy_menu_session" name="Sessions"
-        parent="academy_menu_school"
-            action="academy.action_academy_session"/>
-            -->
     </data>
 </odoo>
