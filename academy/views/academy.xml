@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-  <data>   
-    <!-- explicit list tree view definition -->
+  <data> 
 
+    <!-- list tree view Academy-->
     <record model="ir.ui.view" id="academy_list">
       <field name="name">academy.list</field>
       <field name="model">academy.academy</field>
@@ -29,17 +29,16 @@
               <field name="day"/>
               <field name="section"/>
               </group>
-            </group>
-          </sheet>
-          <sheet>
-            <group>
-              <notebook>
+              <notebook colspan="4">
                 <page string="Description">
                   <field name="description" nolabel="1"/>
                 </page>
+                <page string="Descriptions">
+                  <field name="description" nolabel="1"/>
+                </page>
               </notebook>
-              </group>
-            </sheet>
+            </group>
+          </sheet>
             <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers"/>
             <field name="activity_ids" widget="mail_activity" />
@@ -49,16 +48,15 @@
       </field>
     </record>
 
-    <!-- action for tree and form view-->
+    <!-- action-->
     <record id="action_academy_academy" model="ir.actions.act_window">
       <field name="name">Academy.Main.Menu</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">academy.academy</field>
       <field name="view_mode">tree,form</field>
     </record>
-    <!-- actions opening views on models -->
 
-    <!-- ADD SCHOOL VIEW TO SCHOOL-->
+<!--____________________________________STUDENT VIEWS_________________________________-->
     <record id="student_list" model="ir.ui.view" >
       <field name="name">Students</field>
       <field name="model">school.student</field>
@@ -110,8 +108,74 @@
       <field name="res_model">school.student</field>
       <field name="view_mode">tree,form</field>
     </record>
+<!--____________________________________SESSION VIEWS_________________________________-->
+   <!-- <record id="session_list_view" model="ir.ui.view" >
+      <field name="name">Session</field>
+      <field name="model">academy.session</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="start_date"/>
+          <field name="duration"/>
+          <field name="seats"/>
+        </tree>
+      </field>
+    </record>
+       --> 
+        <record id="session_form_view" model="ir.ui.view">
+            <field name="name">session.form</field>
+            <field name="model">academy.session</field>
+            <field name="arch" type="xml">
+                <form string="Session Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="seats"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_academy_session">
+            <field name="name">Sessions</field>
+            <field name="res_model">academy.session</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    <!-- Top menu item -->
 
+    <menuitem id="academy_menu_root"
+        name="Academy"  
+        web_icon ="academy,static/description/icon.png" 
+        sequence="0"/>
 
+    <!-- menu categories -->
+
+    <menuitem id="academy_menu_school" 
+        name="School" 
+        parent="academy_menu_root"/>
+
+    <!-- actions -->
+    <menuitem id="academy_menu_student" 
+        name="Student"  
+        parent="academy_menu_school"
+        action="academy.action_school_student"/>
+
+    <menuitem id="academy_menu_major"
+        name="Major"  
+        parent="academy_menu_school"
+        action="academy.action_academy_academy"/>
+
+    <menuitem id="academy_menu_server"
+        name="Courses"  
+        parent="academy_menu_school"
+        action="academy.action_academy_academy"/>
+
+    <menuitem id="academy_menu_session" name="Sessions"
+        parent="academy_menu_school"
+            action="academy.action_academy_session"/>
 
   </data>
 </odoo>
