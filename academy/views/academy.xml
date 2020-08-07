@@ -2,7 +2,6 @@
 
 <odoo>
   <data> 
-
     <!-- list tree view Academy-->
     <record model="ir.ui.view" id="academy_list">
       <field name="name">academy.list</field>
@@ -67,11 +66,11 @@
       <field name="model">school.student</field>
       <field name="arch" type="xml">
         <tree>
-            <field name="name"/>
-            <field name="age"/>
-            <field name="gender"/>
-            <field name="guardian"/>
-            <field name="allergy"/>
+          <field name="name"/>
+          <field name="age"/>
+          <field name="gender"/>
+          <field name="guardian"/>
+          <field name="allergy"/>
         </tree>
       </field>
     </record>
@@ -93,8 +92,8 @@
 
               <group colspan="2" col="2">
                 <seperator string="Parent/Guardian" colspan="2"/>
-                  <field name="guardian"/>
-                  <field name="allergy"/>
+                <field name="guardian"/>
+                <field name="allergy"/>
               </group>
             </group>
           </sheet>
@@ -118,49 +117,8 @@
           </p>
         </field>
     </record>
-<!--____________________________________SESSION VIEWS_________________________________-->
-   <!-- <record id="session_list_view" model="ir.ui.view" >
-      <field name="name">Session</field>
-      <field name="model">academy.session</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="start_date"/>
-          <field name="duration"/>
-          <field name="seats"/>
-        </tree>
-      </field>
-    </record>
-       --> 
-        <record id="session_form_view" model="ir.ui.view">
-            <field name="name">session.form</field>
-            <field name="model">academy.session</field>
-            <field name="arch" type="xml">
-                <form string="Session Form">
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="start_date"/>
-                            <field name="duration"/>
-                            <field name="seats"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-        
-        <record id="action_academy_session" model="ir.actions.act_window" >
-            <field name="name">Sessions</field>
-            <field name="res_model">academy.session</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create your Session!
-              </p>
-        </field>
-        </record>
 <!--____________________________________MAJOR VIEWS_________________________________-->
-<record id="major_list_view" model="ir.ui.view" >
+    <record id="major_list_view" model="ir.ui.view" >
       <field name="name">Major</field>
       <field name="model">academy.major</field>
       <field name="arch" type="xml">
@@ -171,109 +129,123 @@
       </field>
     </record>
 
-        <record id="major_form_view" model="ir.ui.view">
-            <field name="name">major.form</field>
-            <field name="model">academy.major</field>
-            <field name="arch" type="xml">
-                <form string="Major Form">
-                    <sheet>
-                        <group>
-                          <field name="major"/>
-                          <field name="degreeType"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-        
-        <record id="action_academy_major" model="ir.actions.act_window" >
-            <field name="name">Major</field>
-            <field name="res_model">academy.major</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Add a Major!
-              </p>
-            </field>
-        </record>  
-<!--____________________________________Course VIEWS_________________________________-->
+    <record id="major_form_view" model="ir.ui.view">
+      <field name="name">major.form</field>
+      <field name="model">academy.major</field>
+      <field name="arch" type="xml">
+        <form string="Major Form">
+          <sheet>
+            <group>
+              <field name="major"/>
+              <field name="degreeType"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
-        <record id="course_list_view" model="ir.ui.view" >
+    <record id="action_academy_major" model="ir.actions.act_window" >
+      <field name="name">Major</field>
+      <field name="res_model">academy.major</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add a Major!
+        </p>
+      </field>
+    </record>  
+<!--____________________________________Course VIEWS w/ manytoone_________________________________-->
+
+    <record id="course_list_view" model="ir.ui.view" >
       <field name="name">Course</field>
       <field name="model">academy.course</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="course"/>
+        <tree string="Course Tree">
+          <field name="name"/>
+          <field name="responsible_id"/>
         </tree>
       </field>
     </record>
 
-        <record id="course_form_view" model="ir.ui.view">
-            <field name="name">course.form</field>
-            <field name="model">academy.course</field>
-            <field name="arch" type="xml">
-                <form string="Course Form">
-                    <sheet>
-                        <group>
-                          <field name="course"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+    <record id="course_form_view" model="ir.ui.view">
+      <field name="name">course.form</field>
+      <field name="model">academy.course</field>
+      <field name="arch" type="xml">
+        <form string="Course Form">
+          <sheet>
+            <notebook>
+              <page string="Description">
+                <field name="description"/>
+              </page>
+              <page string="Sessions">
+                <field name="session_ids">
+                  <tree string="Registered sessions">
+                    <field name="name"/>
+                    <field name="instructor_id"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
         
-        <record id="action_academy_course" model="ir.actions.act_window" >
-            <field name="name">Course</field>
-            <field name="res_model">academy.course</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Add your Course!
-              </p>
-            </field>
-        </record>  
+    <record id="action_academy_course" model="ir.actions.act_window" >
+      <field name="name">Course</field>
+      <field name="res_model">academy.course</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add your Course!
+        </p>
+      </field>
+    </record>         
+<!--____________________________________SESSION VIEWS_________________________________-->
+   <record id="session_list_view" model="ir.ui.view" >
+    <field name="name">session.tree</field>
+    <field name="model">academy.session</field>
+    <field name="arch" type="xml">
+      <tree string="Session Tree">
+        <field name="name"/>
+        <field name="course_id"/>
+      </tree>
+    </field>
+    </record>
 
-
-    <!-- Top menu item -->
-
-    <menuitem id="academy_menu_root"
-        name="Academy"  
-        web_icon ="academy,static/description/icon.png" 
-        sequence="0"/>
-
-    <!-- menu categories -->
-
-    <menuitem id="academy_menu_school" 
-        name="School" 
-        parent="academy_menu_root"/>
-
-    <menuitem id="academy_menu_academy" 
-        name="Test" 
-        parent="academy_menu_root"/>
-
-    <!-- actions -->
-    <menuitem id="academy_menu_student" 
-        name="Student"  
-        parent="academy_menu_school"
-        action="academy.action_school_student"/>
-
-    <menuitem id="academy_menu_major"
-        name="Major"  
-        parent="academy_menu_school"
-        action="academy.action_academy_major"/>
-
-    <menuitem id="academy_menu_course"
-        name="Courses"  
-        parent="academy_menu_school"
-        action="academy.action_academy_course"/>
-        
-    <menuitem id="academy_menu_session" name="Sessions"
-        parent="academy_menu_academy"
-            action="academy.action_academy_session"/>
-
-    <menuitem id="academy_menu_no_clue" name="No Clue"
-        parent="academy_menu_academy"
-        action="academy.action_academy_academy"/>
-
+    <record id="session_form_view" model="ir.ui.view">
+      <field name="name">session</field>
+      <field name="model">academy.session</field>
+      <field name="arch" type="xml">
+        <form string="Session Form">
+          <sheet>
+            <group>
+              <group string="General">
+                <field name="course_id"/>
+                <field name="name"/>
+                <field name="instructor_id"/>
+              </group>
+              <group string="Schedule">
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="seats"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+          
+    <record id="action_academy_session" model="ir.actions.act_window" >
+      <field name="name">Sessions</field>
+      <field name="res_model">academy.session</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Create your Session!
+        </p>
+      </field>
+    </record>
+    
   </data>
 </odoo>
