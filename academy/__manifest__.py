@@ -2,10 +2,9 @@
 {
     "name": "Academy",
     "summary": """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        University system""",
     "description": """
-        Long description of module's purpose
+        Testing new features with a university based system
     """,
     "author": "Jevin Dement",
     "website": "http://www.yourcompany.com",
