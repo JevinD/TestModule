@@ -35,7 +35,7 @@
         action="academy.action_academy_course"/>
         
     <menuitem id="academy_menu_session" name="Sessions"
-        parent="academy_menu_academy"
+        parent="academy_menu_school"
             action="academy.action_academy_session"/>
 
     <menuitem id="academy_menu_no_clue" name="No Clue"

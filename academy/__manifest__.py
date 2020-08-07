@@ -22,6 +22,7 @@
         "views/academy_menu.xml",
         "views/academy.xml",
         "views/templates.xml",
+        "views/instructor.xml",
     ],
     # only loaded in demonstration mode
     "demo": ["demo/demo.xml",],

@@ -7,14 +7,18 @@ class Session(models.Model):
 
     name = fields.Char(required=True)
     start_date = fields.Date()
-    duration = fields.Float(digits=(6, 2), help="Duration in days")
+    duration = fields.Float(
+        digits=(1, 0), help="Duration in days", string="Length in Days"
+    )
     seats = fields.Integer(string="Number of seats")
 
-    instructor_id = fields.Many2one("res.partner", string="Instructor")
+    instructor_id = fields.Many2one(
+        "res.partner", string="Instructor", domain=[("instructor", "=", True)]
+    )
     course_id = fields.Many2one(
         "academy.course", ondelete="cascade", string="Course", required=True
     )
-    attendee_ids = fields.Many2many("res.partner", string="Attendees")
+    attendee_ids = fields.Many2many("school.student", string="Attendees")
 
 
 class academyCourse(models.Model):
