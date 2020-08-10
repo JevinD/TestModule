@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+import random
 
 
 class academy(models.Model):
@@ -34,6 +35,11 @@ class academy(models.Model):
     value = fields.Integer()
     value2 = fields.Float(compute="_value_pc", store=True)
     description = fields.Text(required="True")
+    name = fields.Char(compute="_compute_name")
+
+    def _compute_name(self):
+        for record in self:
+            record.name = "CS" + str(random.randint(1, 1e6))
 
     @api.depends("value")
     def _value_pc(self):
