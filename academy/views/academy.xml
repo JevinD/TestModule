@@ -169,6 +169,23 @@
       </field>
     </record>
 
+    <record id="course_search_view" model="ir.ui.view" >
+      <field name="name">Course</field>
+      <field name="model">academy.course</field>
+      <field name="arch" type="xml">
+        <search>
+            <field name="name"/>
+            <field name="description"/>
+            <filter name="my_courses" string="My Courses"
+                    domain="[('responsible_id', '=', uid)]"/>
+            <group string="Group By">
+                <filter name="by_responsible" string="Responsible"
+                        context="{'group_by': 'responsible_id'}"/>
+            </group>
+        </search>
+      </field>
+    </record>
+
     <record id="course_form_view" model="ir.ui.view">
       <field name="name">course.form</field>
       <field name="model">academy.course</field>
@@ -179,7 +196,6 @@
               <page string="Description">
                 <field name="name" />
                 <field name="description" string ="description"/>
-
               </page>
               <page string="Sessions">
                 <field name="session_ids">
@@ -199,6 +215,7 @@
       <field name="name">Course</field>
       <field name="res_model">academy.course</field>
       <field name="view_mode">tree,form</field>
+      <field name="context" eval="{'search_default_my_courses': 1}"/>
       <field name="help" type="html">
         <p class="o_view_nocontent_smiling_face">
           Add your Course!
@@ -258,10 +275,78 @@
       </field>
     </record>
 
+    <record id="session_gantt_view" model="ir.ui.view" >
+      <field name="name">session.gantt</field>
+      <field name="model">academy.session</field>
+      <field name="arch" type="xml">
+          <gantt string="Session Gantt"
+                  date_start="start_date" date_stop="end_date"
+                  default_group_by='instructor_id'>
+          </gantt>
+      </field>
+    </record>
+
+    <record id="academy_session_graph_view" model="ir.ui.view" >
+        <field name="name">academy.session.graph</field>
+        <field name="model">academy.session</field>
+        <field name="arch" type="xml">
+            <graph string="Participations by Courses">
+                <field name="course_id"/>
+                <field name="attendees_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="academy_session_kanban_view" model="ir.ui.view" >
+        <field name="name">academy.session.kanban</field>
+        <field name="model">academy.session</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="course_id">
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                                          oe_kanban_global_click_edit oe_semantic_html_override
+                                          oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                            <div class="oe_dropdown_kanban">
+                                <!-- dropdown menu -->
+                                <div class="oe_dropdown_toggle">
+                                    <i class="fa fa-bars fa-lg" title="Manage" aria-label="Manage"/>
+                                    <ul class="oe_dropdown_menu">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                        <li>
+                                            <ul class="oe_kanban_colorpicker"
+                                                data-field="color"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                            <div t-attf-class="oe_kanban_content">
+                                <!-- title -->
+                                Session name:
+                                <field name="name"/>
+                                <br/>
+                                Start date:
+                                <field name="start_date"/>
+                                <br/>
+                                duration:
+                                <field name="duration"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="action_academy_session" model="ir.actions.act_window" >
       <field name="name">Sessions</field>
       <field name="res_model">academy.session</field>
-      <field name="view_mode">tree,form,calendar</field>
+      <field name="view_mode">tree,form,calendar,gantt,graph,kanban</field>
       <field name="help" type="html">
         <p class="o_view_nocontent_smiling_face">
           Create your Session!
