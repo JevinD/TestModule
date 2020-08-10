@@ -68,6 +68,14 @@ class academyCourse(models.Model):
         "res.users", ondelete="set null", string="Responsible", index=True
     )
     session_ids = fields.One2many("academy.session", "course_id", string="Sessions")
+    _sql_constraints = [
+        (
+            "name_description_check",
+            "CHECK(name != description)",
+            "The title of the course should not be the description",
+        ),
+        ("name_unique", "UNIQUE(name)", "The course title must be unique"),
+    ]
 
     @api.constrains("instructor_id", "attendee_ids")
     def _check_instructor_not_in_attendees(self):
