@@ -1,4 +1,5 @@
-from odoo import fields, models
+from odoo import fields, models, api
+from odoo.exceptions import ValidationError
 
 
 class SchoolStudent(models.Model):
@@ -19,3 +20,13 @@ class SchoolStudent(models.Model):
         required=True,
     )
     image = fields.Binary("Image")
+
+    @api.constrains("age")
+    def _check_something(self):
+        for record in self:
+            if record.age <= 17:
+                raise ValidationError(
+                    "You are too young to register as a student \nYour age: %s \nRequirement age is 17"
+                    % record.age
+                )
+        # all records passed the test, don't return anything
