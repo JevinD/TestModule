@@ -61,15 +61,13 @@ class Session(models.Model):
         for r in self:
             r.attendees_count = len(r.attendee_ids)
 
-    """
     @api.constrains("instructor_id", "attendee_ids")
     def _check_instructor_not_in_attendees(self):
         for r in self:
-            if r.instructor_id and r.instructor_id in r.attendee_ids:
+            if r.instructor_id and r.instructor_id in r.attendee_ids.partner_id:
                 raise exceptions.ValidationError(
                     "A session's instructor can't be an attendee"
                 )
-    """
 
     @api.depends("seats", "attendee_ids")
     def _taken_seats(self):
