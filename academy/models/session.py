@@ -62,9 +62,17 @@ class academyCourse(models.Model):
     _description = "Academy courses"
 
     name = fields.Char(string="Course")
-    description = fields.Text()
+    description = fields.Text(string="description")
 
     responsible_id = fields.Many2one(
         "res.users", ondelete="set null", string="Responsible", index=True
     )
     session_ids = fields.One2many("academy.session", "course_id", string="Sessions")
+
+    @api.constrains("instructor_id", "attendee_ids")
+    def _check_instructor_not_in_attendees(self):
+        for r in self:
+            if r.instructor_id and r.instructor_id in r.attendee_ids:
+                raise exceptions.ValidationError(
+                    "A session's instructor can't be an attendee"
+                )

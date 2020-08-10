@@ -177,7 +177,9 @@
           <sheet>
             <notebook>
               <page string="Description">
-                <field name="description"/>
+                <field name="name" />
+                <field name="description" string ="description"/>
+
               </page>
               <page string="Sessions">
                 <field name="session_ids">
