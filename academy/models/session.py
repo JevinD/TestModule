@@ -1,4 +1,4 @@
-from odoo import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions, _
 from odoo.exceptions import ValidationError
 from datetime import timedelta
 
@@ -27,7 +27,7 @@ class Session(models.Model):
     course_id = fields.Many2one(
         "academy.course", ondelete="cascade", string="Course", required=True
     )
-    attendee_ids = fields.Many2many("res.users", string="Attendees")
+    attendee_ids = fields.Many2many("res.partner", string="Attendees")
     taken_seats = fields.Float(string="Taken seats", compute="_taken_seats")
     end_date = fields.Date(
         string="End Date", store=True, compute="_get_end_date", inverse="_set_end_date"
@@ -64,7 +64,7 @@ class Session(models.Model):
     @api.constrains("instructor_id", "attendee_ids")
     def _check_instructor_not_in_attendees(self):
         for r in self:
-            if r.instructor_id and r.instructor_id in r.attendee_ids.partner_id:
+            if r.instructor_id and r.instructor_id in r.attendee_ids:
                 raise exceptions.ValidationError(
                     "A session's instructor can't be an attendee"
                 )

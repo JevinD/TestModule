@@ -18,6 +18,7 @@
     "depends": ["base", "website", "mail"],
     # always loaded
     "data": [
+        "security/security.xml",
         "security/ir.model.access.csv",
         "views/academy_menu.xml",
         "views/academy.xml",
