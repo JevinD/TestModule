@@ -5,3 +5,4 @@ from . import student
 from . import session
 from . import major
 from . import instructor
+from . import wizard
