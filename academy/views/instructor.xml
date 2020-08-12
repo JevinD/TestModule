@@ -29,17 +29,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="academy_menu_config" 
-        name="Configuration" 
-        parent="academy_menu_root"/>
 
-    <menuitem id="contact_menu" name="Contacts"
-        parent="academy_menu_config"
-        action="action_contact_list"/>
-
-    <menuitem id="contact_cat_menu" name="Contact Tags"
-        parent="academy_menu_config"
-        action="action_contact_cat_list"/>
 
     <record model="res.partner.category" id="teacher1">
         <field name="name">Teacher / Level 1</field>
@@ -48,4 +38,17 @@
     <record model="res.partner.category" id="teacher2">
         <field name="name">Teacher / Level 2</field>
     </record>
+
+        <menuitem id="academy_menu_config" 
+        name="Configuration" 
+        parent="academy_menu_root"
+       />
+
+    <menuitem id="contact_menu" name="Contacts"
+        parent="academy_menu_config"
+        action="action_contact_list"/>
+
+    <menuitem id="contact_cat_menu" name="Contact Tags"
+        parent="academy_menu_config"
+        action="action_contact_cat_list"/>
 </odoo>
