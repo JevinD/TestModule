@@ -105,7 +105,15 @@ class academyCourse(models.Model):
     description = fields.Text(string="description")
 
     responsible_id = fields.Many2one(
-        "res.users", ondelete="set null", string="Responsible", index=True
+        "res.users",
+        ondelete="set null",
+        string="Responsible",
+        index=True,
+        domain=[
+            "|",
+            ("instructor", "=", True),
+            ("category_id.name", "ilike", "Teacher"),
+        ],
     )
     session_ids = fields.One2many("academy.session", "course_id", string="Sessions")
     _sql_constraints = [

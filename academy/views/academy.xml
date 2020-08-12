@@ -192,11 +192,14 @@
       <field name="arch" type="xml">
         <form string="Course Form">
           <sheet>
+            <h1>
+              <field name="name" default_focus="1" placeholder="Course Name"/>
+            </h1>
+            <h2>
+            <field name="responsible_id" default_focus="1" placeholder="Instructor"/>
+            </h2>
+            <field name="description" default_focus="2" placeholder="Description"/>
             <notebook>
-              <page string="Description">
-                <field name="name" />
-                <field name="description" string ="description"/>
-              </page>
               <page string="Sessions">
                 <field name="session_ids">
                   <tree string="Registered sessions">
@@ -380,8 +383,5 @@
         </p>
       </field>
     </record>
-    
-
-
   </data>
 </odoo>

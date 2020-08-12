@@ -10,11 +10,13 @@
     <!-- menu categories -->
     <menuitem id="academy_menu_school" 
         name="School" 
-        parent="academy_menu_root"/>
+        parent="academy_menu_root"
+        sequence="2"/>
 
     <menuitem id="academy_menu_academy" 
         name="Test" 
-        parent="academy_menu_root"/>
+        parent="academy_menu_root"
+        sequence="4"/>
 
     
     
@@ -32,7 +34,8 @@
     <menuitem id="academy_menu_course"
         name="Courses"  
         parent="academy_menu_school"
-        action="academy.action_academy_course"/>
+        action="academy.action_academy_course"
+        sequence="2"/>
         
     <menuitem id="academy_menu_session" name="Sessions"
         parent="academy_menu_school"
@@ -42,5 +45,17 @@
         parent="academy_menu_academy"
         action="academy.action_academy_academy"/>
 
+        <menuitem id="academy_menu_config" 
+        name="Configuration" 
+        parent="academy_menu_root"
+       />
+
+    <menuitem id="contact_menu" name="Contacts"
+        parent="academy_menu_config"
+        action="action_contact_list"/>
+
+    <menuitem id="contact_cat_menu" name="Contact Tags"
+        parent="academy_menu_config"
+        action="action_contact_cat_list"/>
     </data>
 </odoo>
