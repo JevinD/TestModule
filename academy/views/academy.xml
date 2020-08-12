@@ -192,11 +192,14 @@
       <field name="arch" type="xml">
         <form string="Course Form">
           <sheet>
+            <h1>
+              <field name="name" default_focus="1" placeholder="Course Name"/>
+            </h1>
+            <h2>
+            <field name="responsible_id" default_focus="1" placeholder="Instructor"/>
+            </h2>
+            <field name="description" default_focus="2" placeholder="Description"/>
             <notebook>
-              <page string="Description">
-                <field name="name" />
-                <field name="description" string ="description"/>
-              </page>
               <page string="Sessions">
                 <field name="session_ids">
                   <tree string="Registered sessions">
@@ -381,7 +384,47 @@
       </field>
     </record>
     
+<!--________________________________Top menu item____________________________________-->
 
+    <menuitem id="academy_menu_root"
+        name="Academy"  
+        web_icon ="academy,static/description/icon.png" 
+        sequence="0"/>
+
+    <!-- menu categories -->
+    <menuitem id="academy_menu_school" 
+        name="School" 
+        parent="academy_menu_root"/>
+
+    <menuitem id="academy_menu_academy" 
+        name="Test" 
+        parent="academy_menu_root"/>
+
+    
+    
+    <!-- sub-menu actions -->
+    <menuitem id="academy_menu_student" 
+        name="Student"  
+        parent="academy_menu_school"
+        action="academy.action_school_student"/>
+
+    <menuitem id="academy_menu_major"
+        name="Major"  
+        parent="academy_menu_school"
+        action="academy.action_academy_major"/>
+
+    <menuitem id="academy_menu_course"
+        name="Courses"  
+        parent="academy_menu_school"
+        action="academy.action_academy_course"/>
+        
+    <menuitem id="academy_menu_session" name="Sessions"
+        parent="academy_menu_school"
+            action="academy.action_academy_session"/>
+
+    <menuitem id="academy_menu_no_clue" name="No Clue"
+        parent="academy_menu_academy"
+        action="academy.action_academy_academy"/>
 
   </data>
 </odoo>
