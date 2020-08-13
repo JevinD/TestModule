@@ -1,11 +1,33 @@
 <odoo>
-    <data>
-
-          <record id="object0" model="academy.academy">
-            <field name="value">0</field>
-            <field name="day">Monday<field/>
-          <field name="section">Github</field>
+  <data>
+           <!--__________major Demo Data__________-->
+          <record id="object0" model="academy.major">
+            <field name="major">computer scienceD</field>
+            <field name="degreeType">b/s</field>
           </record>
+          
+          <record id="object1" model="academy.major">
+            <field name="major">mathD</field>
+            <field name="degreeType">b/s</field>
+          </record>
+          
+          <record id="object2" model="academy.major">
+            <field name="major">historyD</field>
+            <field name="degreeType">a/a</field>
+          </record>
+          <!--__________course Demo Data__________-->
+          <record id="course0" model="academy.course">
+            <field name="name">cs100D</field>
+            <field name="description">computer ethics</field>
+            <field name="responsible_id" ref= "base.user_admin"/>
+          </record>
+          
+          <record id="course1" model="academy.course">
+            <field name="name">hs100D</field>
+            <field name="description">history ethics</field>
+            <field name="responsible_id" ref= "base.user_demo"/>
+          </record>
+          <!--__________session Demo Data__________-->
 
-    </data>
+  </data>
 </odoo>
