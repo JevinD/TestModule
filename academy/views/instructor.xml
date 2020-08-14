@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <odoo>
-<!--
-    <record id="academy_search_view" model="ir.ui.view" >
-      <field name="name">Academy</field>
+
+ <!--    <record id="academy_search_view" model="ir.ui.view" >
+      <field name="name">Academy.search</field>
       <field name="model">res.partner</field>
-    <field name="inherit_id" ref="base.view_partner_tree"/>
+    <field name="inherit_id" ref="res.partner.select"/>
         <field name="arch" type="xml">
         <search>
-            <xpath expr="//filter[@name='filter_name']" position="replace">
+            <xpath expr="//filter[@name='filter_domain']" position="replace">
                 <filter string="Any string" 
                   domain="[('instructor','=','True')]"/>
             </xpath>
         </search>
     </field>
+    </record> -->
+
+        <record id="partner_search_view" model="ir.ui.view" >
+      <field name="name">partner.contacts</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <search>
+            <field name="name"/>
+            <filter name="Instructors" string="Instructors"
+                    domain="[('instructor', '=', uid)]"/>
+
+            <filter name="Students" string="Students"
+                    domain="[('instructor','!=', uid)]"/>
+        </search>
+      </field>
     </record>
--->
+
     <!-- Add instructor field to existing view -->
     <record model="ir.ui.view" id="partner_instructor_form_view">
-        <field name="name">partner.instructor</field>
+        <field name="name">partner_instructor</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
@@ -54,8 +69,8 @@
         <field name="name">Teacher / Level 2</field>
     </record>
 
-    <menuitem id="contact_menu" name="Contacts"
-        parent="academy_menu_config"
+    <menuitem id="contact_menu" name="Students"
+        parent="academy_menu_school"
         action="action_contact_list"/>
 
     <menuitem id="contact_cat_menu" name="Contact Tags"
