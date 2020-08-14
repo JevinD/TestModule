@@ -412,11 +412,11 @@
         action="academy.action_academy_course"
         sequence="2"/>
         
-    <menuitem id="academy_menu_student" 
+<!--     <menuitem id="academy_menu_student" 
         name="Student"  
         parent="academy_menu_school"
         action="academy.action_school_student"/>
-
+ -->
     <menuitem id="academy_menu_major"
         name="Major"  
         parent="academy_menu_school"
