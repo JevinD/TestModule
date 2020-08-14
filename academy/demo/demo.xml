@@ -26,8 +26,17 @@
             <field name="name">hs100D</field>
             <field name="description">history ethics</field>
             <field name="responsible_id" ref= "base.user_demo"/>
+
           </record>
           <!--__________session Demo Data__________-->
-
+          <record id="course1" model="academy.session">
+            <field name="name">session1</field>
+            <field name="start_date">2020-08-13</field>
+            <field name="duration">2</field>
+            <field name="seats">5</field>
+            <field name="instructor_id" ref="base.partner_admin"/>
+            <field name="course_id">2</field>
+            <field name="attendees_count">3</field>
+          </record> 
   </data>
 </odoo>

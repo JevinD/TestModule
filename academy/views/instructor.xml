@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <odoo>
+<!--
+    <record id="academy_search_view" model="ir.ui.view" >
+      <field name="name">Academy</field>
+      <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+        <search>
+            <xpath expr="//filter[@name='filter_name']" position="replace">
+                <filter string="Any string" 
+                  domain="[('instructor','=','True')]"/>
+            </xpath>
+        </search>
+    </field>
+    </record>
+-->
     <!-- Add instructor field to existing view -->
     <record model="ir.ui.view" id="partner_instructor_form_view">
         <field name="name">partner.instructor</field>
