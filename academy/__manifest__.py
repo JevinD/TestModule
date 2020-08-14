@@ -26,5 +26,5 @@
         "views/instructor.xml",
     ],
     # only loaded in demonstration mode
-    "demo": ["demo/demo.xml",],
+    # "demo": ["demo/demo.xml",],
 }
