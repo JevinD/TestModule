@@ -7,7 +7,7 @@ class Session(models.Model):
     _name = "academy.session"
     _description = "Academy Sessions"
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, default="SE")
     start_date = fields.Date()
     duration = fields.Float(
         digits=(1, 0), help="Duration in days", string="Length in Days"
@@ -105,7 +105,7 @@ class academyCourse(models.Model):
     description = fields.Text(string="description")
 
     responsible_id = fields.Many2one(
-        "res.users",
+        "res.partner",
         ondelete="set null",
         string="Responsible",
         index=True,

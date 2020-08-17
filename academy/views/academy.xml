@@ -193,7 +193,7 @@
         <form string="Course Form">
           <sheet>
             <h1>
-              <field name="name" default_focus="1" placeholder="Course Name"/>
+              <field name="name" default_focus="1" placeholder="Course Name" string="Course"/>
             </h1>
             <h2>
             <field name="responsible_id" default_focus="1" placeholder="Instructor"/>
@@ -397,10 +397,10 @@
         parent="academy_menu_root"
         sequence="2"/>
 
-    <menuitem id="academy_menu_academy" 
+<!--     <menuitem id="academy_menu_academy" 
         name="Test" 
         parent="academy_menu_root"
-        sequence="4"/>
+        sequence="4"/> -->
 
     
     
@@ -427,9 +427,9 @@
         parent="academy_menu_school"
             action="academy.action_academy_session"/>
 
-    <menuitem id="academy_menu_no_clue" name="No Clue"
+<!--     <menuitem id="academy_menu_no_clue" name="No Clue"
         parent="academy_menu_academy"
-        action="academy.action_academy_academy"/>
+        action="academy.action_academy_academy"/> -->
 
         <menuitem id="academy_menu_config" 
         name="Configuration" 
