@@ -1,124 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
   <data> 
-    <!-- list tree view Academy-->
-    <record model="ir.ui.view" id="academy_list">
-      <field name="name">academy.list</field>
-      <field name="model">academy.academy</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="create_date"/>
-          <field name="name"/>
-          <field name="day"/>
-          <field name="description"/>
-          <field name="section"/>
-        </tree>
-      </field>
-    </record>
-
-    <!-- form view defintion -->
-    <record model="ir.ui.view" id="academy_form">
-      <field name="name">academy.form</field>
-      <field name="model">academy.academy</field>
-      <field name="arch" type="xml">
-        <form string ="Task form">
-          <sheet>
-            <group>
-              <group>
-              <field name="name"/>
-              <field name="day"/>
-              <field name="section"/>
-              </group>
-              <notebook colspan="4">
-                <page string="Description">
-                  <field name="description" nolabel="1"/>
-                </page>
-                <page string="Descriptions">
-                  <field name="description" nolabel="1"/>
-                </page>
-              </notebook>
-            </group>
-          </sheet>
-            <div class="oe_chatter">
-            <field name="message_follower_ids" widget="mail_followers"/>
-            <field name="activity_ids" widget="mail_activity" />
-            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
-          </div>
-        </form>
-      </field>
-    </record>
-
-    <!-- action-->
-    <record id="action_academy_academy" model="ir.actions.act_window">
-      <field name="name">Academy.Academy</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="res_model">academy.academy</field>
-      <field name="view_mode">tree,form</field>
-      <field name="help" type="html">
-        <p class="o_view_nocontent_smiling_face">
-          TEST PAGE!
-        </p>
-      </field>
-    </record>
-
-<!--____________________________________STUDENT VIEWS_________________________________-->
-    <record id="student_list" model="ir.ui.view" >
-      <field name="name">Students</field>
-      <field name="model">school.student</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="age"/>
-          <field name="gender"/>
-          <field name="guardian"/>
-          <field name="allergy"/>
-        </tree>
-      </field>
-    </record>
-
-    <record id="student_form" model="ir.ui.view" >
-      <field name="name">student.form</field>
-      <field name="model">school.student</field>
-      <field name="arch" type="xml">
-        <form string="student form">
-          <sheet>
-            <group colspan="4">
-              <group colspan="2" col="2">
-                <seperator string="Student" colspan="2"/>
-                  <field name="image" widget='image' class="oe_avatar" options='{"zoom": true}'/>
-                  <field name="name"/>
-                  <field name="age"/>
-                  <field name="gender"/>
-              </group>
-
-              <group colspan="2" col="2">
-                <seperator string="Parent/Guardian" colspan="2"/>
-                <field name="guardian"/>
-                <field name="allergy"/>
-              </group>
-            </group>
-          </sheet>
-          <div class="oe_chatter">
-            <field name="message_follower_ids" widget="mail_followers"/>
-            <field name="activity_ids" widget="mail_activity" />
-            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
-          </div> 
-        </form>
-      </field>
-    </record>
-
-    <!-- action-->
-    <record id="action_school_student" model="ir.actions.act_window" >
-      <field name="name">Student</field>
-      <field name="res_model">school.student</field>
-      <field name="view_mode">tree,form</field>        
-      <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">
-            Create your First Student!
-          </p>
-        </field>
-    </record>
 <!--____________________________________MAJOR VIEWS_________________________________-->
     <record id="major_list_view" model="ir.ui.view" >
       <field name="name">Major</field>
@@ -193,7 +75,7 @@
         <form string="Course Form">
           <sheet>
             <h1>
-              <field name="name" default_focus="1" placeholder="Course Name"/>
+              <field name="name" default_focus="1" placeholder="Course Name" string="Course"/>
             </h1>
             <h2>
             <field name="responsible_id" default_focus="1" placeholder="Instructor"/>
@@ -397,13 +279,6 @@
         parent="academy_menu_root"
         sequence="2"/>
 
-    <menuitem id="academy_menu_academy" 
-        name="Test" 
-        parent="academy_menu_root"
-        sequence="4"/>
-
-    
-    
     <!-- sub-menu actions -->
 
     <menuitem id="academy_menu_course"
@@ -412,24 +287,15 @@
         action="academy.action_academy_course"
         sequence="2"/>
         
-<!--     <menuitem id="academy_menu_student" 
-        name="Student"  
-        parent="academy_menu_school"
-        action="academy.action_school_student"/>
- -->
     <menuitem id="academy_menu_major"
         name="Major"  
         parent="academy_menu_school"
         action="academy.action_academy_major"/>
 
-        
-    <menuitem id="academy_menu_session" name="Sessions"
+    <menuitem id="academy_menu_session" 
+        name="Sessions"
         parent="academy_menu_school"
             action="academy.action_academy_session"/>
-
-    <menuitem id="academy_menu_no_clue" name="No Clue"
-        parent="academy_menu_academy"
-        action="academy.action_academy_academy"/>
 
         <menuitem id="academy_menu_config" 
         name="Configuration" 

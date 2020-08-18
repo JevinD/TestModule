@@ -7,7 +7,7 @@ class Session(models.Model):
     _name = "academy.session"
     _description = "Academy Sessions"
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, default="SE")
     start_date = fields.Date()
     duration = fields.Float(
         digits=(1, 0), help="Duration in days", string="Length in Days"
@@ -94,47 +94,3 @@ class Session(models.Model):
                     "message": "Increase seats or remove excess attendees",
                 },
             }
-
-
-class academyCourse(models.Model):
-    _name = "academy.course"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Academy courses"
-
-    name = fields.Char(string="Course")
-    description = fields.Text(string="description")
-
-    responsible_id = fields.Many2one(
-        "res.users",
-        ondelete="set null",
-        string="Responsible",
-        index=True,
-        domain=[
-            "|",
-            ("instructor", "=", True),
-            ("category_id.name", "ilike", "Teacher"),
-        ],
-    )
-    session_ids = fields.One2many("academy.session", "course_id", string="Sessions")
-    _sql_constraints = [
-        (
-            "name_description_check",
-            "CHECK(name != description)",
-            "The title of the course should not be the description",
-        ),
-        ("name_unique", "UNIQUE(name)", "The course title must be unique"),
-    ]
-
-    def copy(self, default=None):
-        default = dict(default or {})
-
-        copied_count = self.search_count(
-            [("name", "=like", u"Copy of {}%".format(self.name))]
-        )
-        if not copied_count:
-            new_name = u"Copy of {}".format(self.name)
-        else:
-            new_name = u"Copy of {} ({})".format(self.name, copied_count)
-
-        default["name"] = new_name
-        return super(academyCourse, self).copy(default)
