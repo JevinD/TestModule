@@ -1,5 +1,76 @@
 <odoo>
   <data>
+        <!-- UNIVERSITIES -->
+        <record id="res_partner_1" model="res.partner">
+            <field name="name">NAU</field>
+            <field name="is_company">1</field>
+            <field name="street">1337 N San Joaquin St</field>
+            <field name="city">Flagstaff</field>
+            <field name="state_id" ref='base.state_us_5'/>
+            <field name="zip">95202</field>
+            <field name="email">lumber-inv92@example.com</field>
+            <field name="phone">(828)-316-0593</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="website">http://www.NAU.com</field>
+            <field name="image_1920" type="base64" file="base/static/img/res_partner_18-image.png"/>
+        </record>
+
+        <record id="res_partner_2" model="res.partner">
+            <field name="name">GCU</field>
+            <field name="is_company">1</field>
+            <field name="street">4557 De Silva St</field>
+            <field name="city">Phoenix</field>
+            <field name="state_id" ref='base.state_us_5'/>
+            <field name="zip">94538</field>
+            <field name="phone">(870)-931-0505</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="email">azure.Interior24@example.com</field>
+            <field name="website">http://www.GCU.com</field>
+            <field name="image_1920" type="base64" file="base/static/img/res_partner_12-image.png"/>
+        </record>
+        <!-- INSTRUCTORS -->
+        <record id="res_partner_address_1" model="res.partner">
+            <field name="parent_id" eval="ref('res_partner_1')"/>
+            <field name="name">Dr.Willie Burke</field>
+            <field name="email">willie.burke80@example.com</field>
+            <field name="phone">(846)-523-2111</field>
+            <field name="instructor">True</field>
+        </record>
+        <record id="res_partner_address_5" model="res.partner">
+            <field name="name">Dr.Edwin Hansen</field>
+            <field name="parent_id" eval="ref('res_partner_2')"/>
+            <field name="email">edwin.hansen58@example.com</field>
+            <field name="phone">(943)-352-2555</field>
+            <field name="instructor">True</field>
+        </record>
+        <record id="res_partner_address_7" model="res.partner">
+            <field name="name">Dr.Billy Fox</field>
+            <field name="parent_id" eval="ref('res_partner_2')"/>
+            <field name="email">billy.fox45@example.com</field>
+            <field name="phone">(915)-498-5611</field>
+            <field name="instructor">True</field>
+        </record>
+
+        <!-- STUDENTS -->
+        <record id="res_partner_address_2" model="res.partner">
+            <field name="parent_id" eval="ref('res_partner_1')"/>
+            <field name="name">Ron Gibson</field>
+            <field name="email">ron.gibson76@example.com</field>
+            <field name="phone">(976)-397-4091</field>
+        </record>
+        <record id="res_partner_address_3" model="res.partner">
+            <field name="parent_id" eval="ref('res_partner_2')"/>
+            <field name="name">Douglas Fletcher</field>
+            <field name="email">douglas.fletcher51@example.com</field>
+            <field name="phone">(132)-553-7242</field>
+        </record>
+        <record id="res_partner_address_4" model="res.partner">
+            <field name="name">Floyd Steward</field>
+            <field name="parent_id" eval="ref('res_partner_2')"/>
+            <field name="email">floyd.steward34@example.com</field>
+            <field name="phone">(145)-138-3401</field>
+        </record>
+
            <!--__________major Demo Data__________-->
           <record id="object0" model="academy.major">
             <field name="major">computer scienceD</field>
@@ -17,26 +88,36 @@
           </record>
           <!--__________course Demo Data__________-->
           <record id="course0" model="academy.course">
-            <field name="name">cs100D</field>
+            <field name="name">CS100D</field>
             <field name="description">computer ethics</field>
-            <field name="responsible_id" ref= "base.user_admin"/>
+            <field name="responsible_id" ref= "res_partner_address_5"/>
           </record>
           
           <record id="course1" model="academy.course">
-            <field name="name">hs100D</field>
+            <field name="name">HS100D</field>
             <field name="description">history ethics</field>
-            <field name="responsible_id" ref= "base.user_demo"/>
-
+            <field name="responsible_id" ref= "res_partner_address_1"/>
           </record>
+
           <!--__________session Demo Data__________-->
-          <record id="course1" model="academy.session">
-            <field name="name">session1</field>
-            <field name="start_date">2020-08-13</field>
+          <record id="sess1" model="academy.session">
+            <field name="name">SE0001</field>
+            <field name="start_date">2020-08-18</field>
             <field name="duration">2</field>
             <field name="seats">5</field>
-            <field name="instructor_id" ref="base.partner_admin"/>
-            <field name="course_id">2</field>
+            <field name="instructor_id" ref="res_partner_address_1"/>
+            <field name="course_id" ref="course1"/>
             <field name="attendees_count">3</field>
+          </record>
+
+          <record id="sess2" model="academy.session">
+            <field name="name">SE0002</field>
+            <field name="start_date">2020-08-18</field>
+            <field name="duration">3</field>
+            <field name="seats">5</field>
+            <field name="instructor_id" ref="res_partner_address_5"/>
+            <field name="course_id" ref="course0"/>
+            <!-- <field name="attendee_ids" ref="res_partner_address_2"/> -->
           </record> 
   </data>
 </odoo>

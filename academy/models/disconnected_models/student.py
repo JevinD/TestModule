@@ -1,3 +1,7 @@
+"""
+This python model was created during the building of my first test module. Saving it for possible reference on building other modules
+"""
+
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 

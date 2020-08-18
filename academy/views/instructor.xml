@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <odoo>
 
- <!--    <record id="academy_search_view" model="ir.ui.view" >
+ <!--
+     <record id="academy_search_view" model="ir.ui.view" >
       <field name="name">Academy.search</field>
       <field name="model">res.partner</field>
-    <field name="inherit_id" ref="res.partner.select"/>
+        <field name="inherit_id" ref="res.partner.select"/>
         <field name="arch" type="xml">
-        <search>
-            <xpath expr="//filter[@name='filter_domain']" position="replace">
-                <filter string="Any string" 
-                  domain="[('instructor','=','True')]"/>
-            </xpath>
-        </search>
-    </field>
-    </record> -->
+            <search>
+                <xpath expr="//filter[@name='filter_domain']" position="replace">
+                    <filter string="Any string" domain="[('instructor','=','True')]"/>
+                </xpath>
+            </search>
+        </field>
+    </record> 
+    -->
 
     <record id="partner_search_view" model="ir.ui.view" >
       <field name="name">partner.contacts</field>
@@ -67,13 +68,11 @@
         <field name="name">Teacher / Level 2</field>
     </record>
 
-    <menuitem id="contact_menu" name="Students"
+    <menuitem id="contact_menu" name="Contacts"
         parent="academy_menu_school"
         action="action_contact_list"/>
 
     <menuitem id="contact_cat_menu" name="Contact Tags"
         parent="academy_menu_config"
         action="action_contact_cat_list"/>
-
-
 </odoo>
