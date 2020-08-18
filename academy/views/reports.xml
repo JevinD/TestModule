@@ -20,7 +20,7 @@
                             <t t-foreach="doc.attendee_ids" t-as="attendee">
                                 <li><span t-field="attendee.name"/></li>
                             </t>
-                        </ul>
+                        </ul> 
                     </div>
                 </t>
             </t>
