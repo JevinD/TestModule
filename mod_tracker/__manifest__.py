@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Academy",
+    "name": "Module Tracker",
     "summary": """
-        University system""",
+        OSI module project tracking system""",
     "description": """
-        Testing new features with a university based system
+        Ability to search for modules that are used in projects or past projects
     """,
     "author": "Jevin Dement",
     "website": "http://www.yourcompany.com",
@@ -15,17 +15,13 @@
     "version": "0.1",
     "application": True,
     # any module necessary for this one to work correctly
-    "depends": ["base", "website", "mail"],
+    "depends": ["base", "hr", "project"],
     # always loaded
     "data": [
-        "security/security.xml",
+        #    "security/security.xml",
         "security/ir.model.access.csv",
-        "views/academy_menu.xml",
-        "views/academy.xml",
-        "views/templates.xml",
-        "views/instructor.xml",
-        "views/reports.xml",
-        "demo/demo.xml",
+        "views/module_tracker.xml",
     ],
     # only loaded in demonstration mode
     "demo": ["demo/demo.xml",],
+}
