@@ -1,3 +1,4 @@
 # Odoo test creation Modules
 Odoo Beginner Module
-Open Academy Module converted to personal academy module with extra features for testing
+Open Academy Module converted to Academy model which contains a university admin user like module. This is a module I performed many tests in.
+
