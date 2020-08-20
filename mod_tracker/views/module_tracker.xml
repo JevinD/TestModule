@@ -23,21 +23,21 @@
               <group>
                 <field name="mod_name"/>
                 <field name="module_type"/>
-                <field name="rel_date"/>
-                <field name="repo_url" widget="url"/>
+                <field name="project_ids" />
+                <field name="prim_designer"/>
+                <field name="prim_category"/>
+                <field name="customer"/>
                 </group>
                 <group>
-                <field name="prim_designer"/>
                 <field name="contributor" widget="many2many_tags"/>
-                <field name="customer" widget="many2many_tags"/>
+                <field name="repo_url" widget="url"/>
+                <field name="rel_date"/>
+                <field name="version_sup"/>
+                <field name="dependencies"/>
+                <field name="special_circum"/>
               </group>
             </group>
-            <notebook>
-              <page string="Projects">
-                    <field name="project_ids" />
-              </page>
-            </notebook>
-
+            <field name="mod_description" default_focus="2" placeholder="Summary"/>
           </sheet>
         </form>
       </field>
