@@ -33,11 +33,16 @@
                 <field name="rel_date"/>
                 <field name="version_sup"/>
                 <field name="dependencies"/>
+                <field name="add_category_ids" widget="many2many_tags"/>
                 <field name="special_circum"/>
               </group>
             </group>
             <field name="mod_description" default_focus="2" placeholder="Summary"/>
           </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+          </div>
         </form>
       </field>
     </record>
@@ -58,7 +63,7 @@
       <field name="model">module.category</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="cat_name"/>
+          <field name="name"/>
         </tree>
       </field>
     </record>
@@ -71,7 +76,7 @@
           <sheet>
           <group>
           <group col="1">
-            <field name="cat_name" />
+            <field name="name" />
           </group>
           </group>
           </sheet>
@@ -108,13 +113,12 @@
         name="Configuration" 
         parent="module_tracker_menu_root"
         sequence="4"/>
+
     <!-- sub-menu actions -->
     <menuitem id="module_tracker_category_menu" 
         name="Categories" 
         parent="module_tracker_config_menu"
         action="action_module_tracker_category"
         sequence="1"/>
-
-
   </data>
 </odoo>
