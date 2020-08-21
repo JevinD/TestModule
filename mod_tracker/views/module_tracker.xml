@@ -28,6 +28,7 @@
                 <field name="customer_id"/>
                 </group>
                 <group>
+                <field name="prim_developer"/>
                 <field name="contributor_ids" widget="many2many_tags" placeholder="Developers and Contributors"/>
                 <field name="repo_url" widget="url"/>
                 <field name="rel_date"/>

@@ -40,6 +40,12 @@ class moduleTracker(models.Model):
         string="Primary Designer",
         track_visibility="always",
     )
+    prim_developer = fields.Many2one(
+        "hr.employee",
+        ondelete="cascade",
+        string="Primary Developer",
+        track_visibility="always",
+    )
     contributor_ids = fields.Many2many(
         "hr.employee", string="Contributors", track_visibility="always",
     )
@@ -52,6 +58,7 @@ class moduleTracker(models.Model):
     prim_category_id = fields.Many2one(
         "module.category", string="Primary Category", track_visibility="always",
     )
+    # NOTE: DOES NOT TRACK THIS
     add_category_ids = fields.Many2many(
         "module.category", string="Categories", track_visibility="always",
     )
