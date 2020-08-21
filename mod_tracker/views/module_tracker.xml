@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data> 
-<!--____________________________________MAJOR VIEWS_________________________________-->
     <record id="module_tracker_tree_view" model="ir.ui.view" >
       <field name="name">module.tracker.tree</field>
       <field name="model">module.tracker</field>
@@ -23,13 +22,13 @@
               <group>
                 <field name="mod_name"/>
                 <field name="module_type"/>
-                <field name="project_ids" />
+                <field name="project_id" />
                 <field name="prim_designer"/>
-                <field name="prim_category"/>
-                <field name="customer"/>
+                <field name="prim_category_id"/>
+                <field name="customer_id"/>
                 </group>
                 <group>
-                <field name="contributor" widget="many2many_tags"/>
+                <field name="contributor_ids" widget="many2many_tags"/>
                 <field name="repo_url" widget="url"/>
                 <field name="rel_date"/>
                 <field name="version_sup"/>
@@ -53,6 +52,43 @@
         </p>
       </field>
     </record>  
+  <!-- Configuration -->
+    <record id="module_category_tree_view" model="ir.ui.view" >
+      <field name="name">module.category.tree</field>
+      <field name="model">module.category</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="cat_name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="module_category_form_view" model="ir.ui.view">
+      <field name="name">module.category.form</field>
+      <field name="model">module.category</field>
+      <field name="arch" type="xml">
+        <form string="Categories">
+          <sheet>
+          <group>
+          <group col="1">
+            <field name="cat_name" />
+          </group>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_module_tracker_category" model="ir.actions.act_window" >
+      <field name="name">module.tracker.category.action</field>
+      <field name="res_model">module.category</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add a Category
+        </p>
+      </field>
+    </record>  
 
 <!--________________________________Top menu item____________________________________-->
 
@@ -62,18 +98,23 @@
         sequence="0"/>
 
     <!-- menu categories -->
-    <menuitem id="module_tracker_menu" 
+    <menuitem id="module_tracker_module_menu" 
         name="Module" 
         parent="module_tracker_menu_root"
-        sequence="1"/>
-
-    <!-- sub-menu actions -->
-
-    <menuitem id="module_tracker_submenu"
-        name="Module s"  
-        parent="module_tracker_menu"
         action="action_module_tracker"
         sequence="1"/>
+    
+    <menuitem id="module_tracker_config_menu" 
+        name="Configuration" 
+        parent="module_tracker_menu_root"
+        sequence="4"/>
+    <!-- sub-menu actions -->
+    <menuitem id="module_tracker_category_menu" 
+        name="Categories" 
+        parent="module_tracker_config_menu"
+        action="action_module_tracker_category"
+        sequence="1"/>
+
 
   </data>
 </odoo>

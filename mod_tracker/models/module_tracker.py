@@ -13,20 +13,20 @@ class moduleTracker(models.Model):
     )
     repo_url = fields.Char(string="Github Repo Url")
     rel_date = fields.Date(string="Release Date")
-    # set a one2many within res.partner and create a tab
-    customer = fields.Many2one("res.partner", ondelete="set null", string="Customer",)
-    # CHANGE WHEN SET NEW DATABASE REMOVE THE S@@@@@@@@@@@@@@@@@@@
-    project_ids = fields.Many2one(
+
+    customer_id = fields.Many2one(
+        "res.partner", ondelete="set null", string="Customer",
+    )
+
+    project_id = fields.Many2one(
         "project.project", ondelete="cascade", string="Project"
     )
     # possible create a configuration menu with the set numbers
-    # for now just set as a char field
     version_sup = fields.Char(string="Supported Versions")
     prim_designer = fields.Many2one(
         "hr.employee", ondelete="cascade", string="Primary Designer",
     )
-    # SET TO ONE2MANY AND CREATE A MANY2ONE IN THE HR FORM view
-    contributor = fields.Many2many("hr.employee", string="Contributors & Developers")
+    contributor_ids = fields.Many2many("hr.employee", string="Contributors")
     dependencies = fields.Char(string="Dependencies")
     special_circum = fields.Char(string="Special Circumstances")
     # config = fields.?
@@ -35,5 +35,14 @@ class moduleTracker(models.Model):
     # will be set to the model created in configurations
     # will need to be set in data file
     # CHANGE THIS MODEL REF
-    prim_category = fields.Many2one("hr.employee")
+    prim_category_id = fields.Many2one("module.category")
     # add_category = fields.One2many
+
+
+class Category(models.Model):
+    _name = "module.category"
+    _description = "stores category names for reduced repeating of module categories"
+
+    cat_name = fields.Char(string="Category Name", required=(True))
+
+    module_category_ids = fields.One2many("module.tracker", "prim_category_id")

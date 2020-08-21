@@ -1,0 +1,16 @@
+<odoo>    
+    <record id="module_tracker_project_form_view" model="ir.ui.view" >
+        <field name="name">module_tracker.partner</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='settings']" position="after">
+                <page name="module.page" string="Module Tracker">
+                    <group>
+                        <field name="module_ids"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo> 
