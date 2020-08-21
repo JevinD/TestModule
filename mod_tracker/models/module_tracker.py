@@ -34,13 +34,13 @@ class moduleTracker(models.Model):
     )
     # possible create a configuration menu with the set numbers
     version_sup = fields.Char(string="Supported Versions", track_visibility="always",)
-    prim_designer = fields.Many2one(
+    prim_designer_id = fields.Many2one(
         "hr.employee",
         ondelete="cascade",
         string="Primary Designer",
         track_visibility="always",
     )
-    prim_developer = fields.Many2one(
+    prim_developer_id = fields.Many2one(
         "hr.employee",
         ondelete="cascade",
         string="Primary Developer",
