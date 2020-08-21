@@ -1,0 +1,19 @@
+<odoo>    
+    <record id="module_tracker_primary_designer_form_view" model="ir.ui.view" >
+        <field name="name">module_tracker.primary_designer</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="module.page" string="Module Tracker">
+                    <group>
+                        <field name="module_primary_ids"/>
+                    </group>
+                    <group>
+                        <field name="module_contributor_ids"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo> 

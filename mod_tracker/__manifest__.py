@@ -15,12 +15,15 @@
     "version": "0.1",
     "application": True,
     # any module necessary for this one to work correctly
-    "depends": ["base", "hr", "project"],
+    "depends": ["base", "hr", "project", "contacts"],
     # always loaded
     "data": [
         #    "security/security.xml",
         "security/ir.model.access.csv",
         "views/module_tracker.xml",
+        "views/customer.xml",
+        "views/project.xml",
+        "views/employee.xml",
     ],
     # only loaded in demonstration mode
     "demo": ["demo/demo.xml",],
