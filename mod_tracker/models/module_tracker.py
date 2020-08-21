@@ -40,19 +40,28 @@ class moduleTracker(models.Model):
         string="Primary Designer",
         track_visibility="always",
     )
+    prim_developer = fields.Many2one(
+        "hr.employee",
+        ondelete="cascade",
+        string="Primary Developer",
+        track_visibility="always",
+    )
     contributor_ids = fields.Many2many(
         "hr.employee", string="Contributors", track_visibility="always",
     )
     dependencies = fields.Char(string="Dependencies", track_visibility="always",)
-    special_circum = fields.Char(
-        string="Special Circumstances", track_visibility="always",
-    )
+    special_circum = fields.Char(string="Special", track_visibility="always",)
     # config = fields.?
 
     # will need to be set in data file
     # returns the relationship not the name yet
-    prim_category_id = fields.Many2one("module.category", track_visibility="always",)
-    add_category_ids = fields.Many2many("module.category", track_visibility="always",)
+    prim_category_id = fields.Many2one(
+        "module.category", string="Primary Category", track_visibility="always",
+    )
+    # NOTE: DOES NOT TRACK THIS
+    add_category_ids = fields.Many2many(
+        "module.category", string="Categories", track_visibility="always",
+    )
 
 
 class Category(models.Model):

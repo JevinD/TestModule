@@ -7,6 +7,9 @@ class Contributors(models.Model):
     module_primary_ids = fields.One2many(
         "module.tracker", "prim_designer", string="Primary Designer", readonly=True,
     )
+    module_primary_dev_ids = fields.One2many(
+        "module.tracker", "prim_developer", string="Primary Developer", readonly=True,
+    )
     module_contributor_ids = fields.Many2many(
         "module.tracker", "contributor", string="Contributed", readonly=True
     )

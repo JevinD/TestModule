@@ -10,6 +10,9 @@
                         <field name="module_primary_ids"/>
                     </group>
                     <group>
+                        <field name="module_primary_dev_ids"/>
+                    </group>
+                    <group>
                         <field name="module_contributor_ids"/>
                     </group>
                 </page>
