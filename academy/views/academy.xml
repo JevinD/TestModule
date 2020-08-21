@@ -247,7 +247,7 @@
         </field>
     </record>
 
-    <act_window id="launch_session_wizard"
+<!--     <act_window id="launch_session_wizard"
                 name="Add Attendees"
                 binding_model="academy.session"
                 res_model="academy.wizard"
@@ -264,7 +264,7 @@
           Create your Session!
         </p>
       </field>
-    </record>
+    </record> -->
 
 <!--________________________________Top menu item____________________________________-->
 
