@@ -28,16 +28,16 @@
                 <field name="customer_id"/>
                 </group>
                 <group>
-                <field name="contributor_ids" widget="many2many_tags"/>
+                <field name="contributor_ids" widget="many2many_tags" placeholder="Developers and Contributors"/>
                 <field name="repo_url" widget="url"/>
                 <field name="rel_date"/>
                 <field name="version_sup"/>
                 <field name="dependencies"/>
-                <field name="add_category_ids" widget="many2many_tags"/>
-                <field name="special_circum"/>
+                <field name="add_category_ids" widget="many2many_tags" placeholder="Additional Categories"/>
+                <field name="special_circum" placeholder="Special Circumstances"/>
               </group>
             </group>
-            <field name="mod_description" default_focus="2" placeholder="Summary"/>
+            <field name="mod_description" placeholder="Summary"/>
           </sheet>
           <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers"/>

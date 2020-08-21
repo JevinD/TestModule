@@ -18,7 +18,7 @@
     "depends": ["base", "hr", "project", "contacts"],
     # always loaded
     "data": [
-        #    "security/security.xml",
+        "security/security.xml",
         "security/ir.model.access.csv",
         "views/module_tracker.xml",
         "views/customer.xml",

@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_module_tracker,module.tracker.user,model_module_tracker,base.group_user,1,1,1,1
-access_module_category,module.category.user,model_module_category,base.group_user,1,1,1,1
+access_module_tracker,module.tracker.user,model_module_tracker,base.group_user,1,1,1,0
+access_module_category,module.category.user,model_module_category,base.group_user,1,1,1,0
+manager_module_tracker,module.tracker.manager,model_module_tracker,group_manager,1,1,1,1
+manager_module_category,module.category.manager,model_module_category,group_manager,1,1,1,1
