@@ -5,44 +5,60 @@ from datetime import timedelta
 class moduleTracker(models.Model):
     _name = "module.tracker"
     _description = "Keeps track of OSI public and private modules"
-
-    mod_name = fields.Char(string="Module Name", required=(True))
-    mod_description = fields.Text(string="Summary")
-    module_type = fields.Selection(
-        [("public", "Public"), ("private", "Private")], string="Module Type",
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _rec_name = "mod_name"
+    mod_name = fields.Char(
+        string="Module Name", required=(True), track_visibility="always",
     )
-    repo_url = fields.Char(string="Github Repo Url")
-    rel_date = fields.Date(string="Release Date")
+    mod_description = fields.Text(string="Summary", track_visibility="always",)
+    module_type = fields.Selection(
+        [("public", "Public"), ("private", "Private")],
+        string="Module Type",
+        track_visibility="always",
+    )
+    repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
+    rel_date = fields.Date(string="Release Date", track_visibility="always",)
 
     customer_id = fields.Many2one(
-        "res.partner", ondelete="set null", string="Customer",
+        "res.partner",
+        ondelete="set null",
+        string="Customer",
+        track_visibility="always",
     )
 
     project_id = fields.Many2one(
-        "project.project", ondelete="cascade", string="Project"
+        "project.project",
+        ondelete="cascade",
+        string="Project",
+        track_visibility="always",
     )
     # possible create a configuration menu with the set numbers
-    version_sup = fields.Char(string="Supported Versions")
+    version_sup = fields.Char(string="Supported Versions", track_visibility="always",)
     prim_designer = fields.Many2one(
-        "hr.employee", ondelete="cascade", string="Primary Designer",
+        "hr.employee",
+        ondelete="cascade",
+        string="Primary Designer",
+        track_visibility="always",
     )
-    contributor_ids = fields.Many2many("hr.employee", string="Contributors")
-    dependencies = fields.Char(string="Dependencies")
-    special_circum = fields.Char(string="Special Circumstances")
+    contributor_ids = fields.Many2many(
+        "hr.employee", string="Contributors", track_visibility="always",
+    )
+    dependencies = fields.Char(string="Dependencies", track_visibility="always",)
+    special_circum = fields.Char(
+        string="Special Circumstances", track_visibility="always",
+    )
     # config = fields.?
 
-    # example accounting
-    # will be set to the model created in configurations
     # will need to be set in data file
-    # CHANGE THIS MODEL REF
-    prim_category_id = fields.Many2one("module.category")
-    # add_category = fields.One2many
+    # returns the relationship not the name yet
+    prim_category_id = fields.Many2one("module.category", track_visibility="always",)
+    add_category_ids = fields.Many2many("module.category", track_visibility="always",)
 
 
 class Category(models.Model):
     _name = "module.category"
     _description = "stores category names for reduced repeating of module categories"
 
-    cat_name = fields.Char(string="Category Name", required=(True))
+    name = fields.Char(string="Category Name", required=(True))
 
-    module_category_ids = fields.One2many("module.tracker", "prim_category_id")
+    module_category_ids = fields.One2many("module.tracker", "prim_category_id",)
