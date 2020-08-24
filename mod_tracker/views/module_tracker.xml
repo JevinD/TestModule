@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data> 
-    <record id="module_tracker_tree_view" model="ir.ui.view" >
+    <record id="view_module_tracker_tree" model="ir.ui.view" >
       <field name="name">module.tracker.tree</field>
       <field name="model">module.tracker</field>
       <field name="arch" type="xml">
@@ -12,7 +12,7 @@
       </field>
     </record>
 
-    <record id="module_tracker_form_view" model="ir.ui.view">
+    <record id="view_module_tracker_form" model="ir.ui.view">
       <field name="name">module.tracker.form</field>
       <field name="model">module.tracker</field>
       <field name="arch" type="xml">
@@ -48,7 +48,7 @@
       </field>
     </record>
 
-    <record id="module_tracker_search_view" model="ir.ui.view" >
+    <record id="view_module_tracker_search" model="ir.ui.view" >
       <field name="name">module.tracker.search</field>
       <field name="model">module.tracker</field>
       <field name="arch" type="xml">
@@ -84,7 +84,7 @@
     </record>
 
     <record id="action_module_tracker" model="ir.actions.act_window" >
-      <field name="name">module.tracker.action</field>
+      <field name="name">Module Tracker</field>
       <field name="res_model">module.tracker</field>
       <field name="view_mode">tree,form</field>
       <field name="help" type="html">
@@ -94,8 +94,8 @@
       </field>
     </record>  
   <!-- Configuration -->
-    <record id="module_category_tree_view" model="ir.ui.view" >
-      <field name="name">module.category.tree</field>
+    <record id="view_module_tracker_category_tree" model="ir.ui.view" >
+      <field name="name">module.tracker.category.tree</field>
       <field name="model">module.category</field>
       <field name="arch" type="xml">
         <tree>
@@ -104,8 +104,8 @@
       </field>
     </record>
 
-    <record id="module_category_form_view" model="ir.ui.view">
-      <field name="name">module.category.form</field>
+    <record id="view_module_tracker_category_form" model="ir.ui.view">
+      <field name="name">module.tracker.category.form</field>
       <field name="model">module.category</field>
       <field name="arch" type="xml">
         <form string="Categories">
@@ -121,7 +121,7 @@
     </record>
 
     <record id="action_module_tracker_category" model="ir.actions.act_window" >
-      <field name="name">module.tracker.category.action</field>
+      <field name="name">Category Types</field>
       <field name="res_model">module.category</field>
       <field name="view_mode">tree,form</field>
       <field name="help" type="html">
@@ -139,21 +139,21 @@
         sequence="0"/>
 
     <!-- menu categories -->
-    <menuitem id="module_tracker_module_menu" 
-        name="Module" 
+    <menuitem id="module_tracker_menu_module" 
+        name="Module Finder" 
         parent="module_tracker_menu_root"
         action="action_module_tracker"
         sequence="1"/>
     
-    <menuitem id="module_tracker_config_menu" 
+    <menuitem id="module_tracker_menu_config" 
         name="Configuration" 
         parent="module_tracker_menu_root"
         sequence="4"/>
 
     <!-- sub-menu actions -->
-    <menuitem id="module_tracker_category_menu" 
+    <menuitem id="module_tracker_menu_category" 
         name="Categories" 
-        parent="module_tracker_config_menu"
+        parent="module_tracker_menu_config"
         action="action_module_tracker_category"
         sequence="1"/>
   </data>
