@@ -1,0 +1,19 @@
+<odoo>
+  <data noupdate="1">
+          <record id="category1" model="module.category">
+            <field name="name">Agreement</field>
+          </record>
+          <record id="category2" model="module.category">
+            <field name="name">Helpdesk</field>
+          </record>        
+          <record id="category3" model="module.category">
+            <field name="name">Customers</field>
+          </record>
+          <record id="category4" model="module.category">
+            <field name="name">Contract</field>
+          </record>
+          <record id="category5" model="module.category">
+            <field name="name">Helpdesk</field>
+          </record>
+  </data>
+</odoo>

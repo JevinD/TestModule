@@ -1,5 +1,59 @@
 <odoo>
-  <data>
+  <data noupdate="1">
 
+          <record id="module1" model="module.tracker">
+                <field name="mod_name">account_default_payment_method</field>
+                <field name="module_type">private</field>
+                <field name="project_id" ref="project.project_project_1"/>
+                <field name="prim_designer_id" ref="hr.employee_niv"/>
+                <field name="prim_category_id" ref="category1"/>
+                <field name="customer_id" ref="base.res_partner_10"/>
+                <field name="prim_developer_id" ref="hr.employee_stw"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_mit'), ref('hr.employee_chs')])]"/>
+                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/account_default_payment_method</field>
+                <field name="rel_date">2020-09-3</field>
+                <field name="version_sup">12,13</field>
+                <field name="dependencies">'account','purchase','sale','stock'</field>
+                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
+               <field name="special_circum">Beta Stage</field>
+                <field name="mod_description">Store and use the default payment information of a partner</field>
+          </record>
+          
+          <record id="module2" model="module.tracker">
+                <field name="mod_name">agreement_rma</field>
+                <field name="module_type">public</field>
+                <field name="project_id" ref="project.project_project_1"/>
+                <field name="prim_designer_id" ref="hr.employee_niv"/>
+                <field name="prim_category_id" ref="category4"/>
+                <field name="customer_id" ref="base.res_partner_12"/>
+                <field name="prim_developer_id" ref="hr.employee_stw"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_qdp'), ref('hr.employee_fme')])]"/>
+                <field name="repo_url">https://github.com/ursais/osi-addons/blob/12.0/agreement_rma/</field>
+                <field name="rel_date">2020-08-14</field>
+                <field name="version_sup">12</field>
+                <field name="dependencies">'agreement_serviceprofile','rma'</field>
+                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category1')])]"/>
+               <!-- <field name="special_circum"></field> -->
+                <field name="mod_description">Link rma orders to an agreement</field>
+          </record>
+
+          <record id="module3" model="module.tracker">
+                <field name="mod_name">agreement_helpdesk</field>
+                <field name="module_type">public</field>
+                <field name="project_id" ref="project.project_project_2"/>
+                <field name="prim_designer_id" ref="hr.employee_qdp"/>
+                <field name="prim_category_id" ref="category5"/>
+                <field name="customer_id" ref="base.res_partner_12"/>
+                <field name="prim_developer_id" ref="hr.employee_fme"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_qdp'), ref('hr.employee_fme')])]"/>
+                <field name="repo_url">https://github.com/ursais/osi-addons/blob/12.0/agreement_helpdesk</field>
+                <field name="rel_date">2020-08-14</field>
+                <field name="version_sup">12</field>
+                <field name="dependencies">"helpdesk","agreement_serviceprofile"</field>
+                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category1')])]"/>
+               <!-- <field name="special_circum"></field> -->
+                <field name="mod_description">Link a helpdesk ticket to an agreement</field>
+          </record>
+          
   </data>
 </odoo>

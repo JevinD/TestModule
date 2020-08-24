@@ -10,7 +10,11 @@ class moduleTracker(models.Model):
     mod_name = fields.Char(
         string="Module Name", required=(True), track_visibility="always",
     )
-    mod_description = fields.Text(string="Summary", track_visibility="always",)
+    mod_description = fields.Text(
+        string="Summary",
+        track_visibility="always",
+        help="located in the __manifest__.py file under summary",
+    )
     module_type = fields.Selection(
         [("public", "Public"), ("private", "Private")],
         string="Module Type",
@@ -33,7 +37,11 @@ class moduleTracker(models.Model):
         track_visibility="always",
     )
     # possible create a configuration menu with the set numbers
-    version_sup = fields.Char(string="Supported Versions", track_visibility="always",)
+    version_sup = fields.Char(
+        string="Supported Versions",
+        track_visibility="always",
+        help="located in the __manifest__.py file",
+    )
     prim_designer_id = fields.Many2one(
         "hr.employee",
         ondelete="cascade",
@@ -49,9 +57,12 @@ class moduleTracker(models.Model):
     contributor_ids = fields.Many2many(
         "hr.employee", string="Contributors", track_visibility="always",
     )
-    dependencies = fields.Char(string="Dependencies", track_visibility="always",)
+    dependencies = fields.Char(
+        string="Dependencies",
+        track_visibility="always",
+        help="located in the __manifest__.py file",
+    )
     special_circum = fields.Char(string="Special", track_visibility="always",)
-    # config = fields.?
 
     # will need to be set in data file
     # returns the relationship not the name yet
@@ -62,6 +73,22 @@ class moduleTracker(models.Model):
     add_category_ids = fields.Many2many(
         "module.category", string="Categories", track_visibility="always",
     )
+
+    @api.constrains("prim_category_id", "add_category_ids")
+    def _check_prim_category_not_in_add_categories(self):
+        for r in self:
+            if r.prim_category_id and r.prim_category_id in r.add_category_ids:
+                raise exceptions.ValidationError(
+                    "Primary and additional Category selected more than once"
+                )
+
+    @api.constrains("prim_developer_id", "contributor_ids")
+    def _check_prim_category_not_in_add_categories(self):
+        for r in self:
+            if r.prim_developer_id and r.prim_developer_id in r.contributor_ids:
+                raise exceptions.ValidationError(
+                    "Primary and additional contributors selected more than once"
+                )
 
 
 class Category(models.Model):

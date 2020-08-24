@@ -24,6 +24,7 @@
         "views/customer.xml",
         "views/project.xml",
         "views/employee.xml",
+        "data/module_tracker_data.xml",
     ],
     # only loaded in demonstration mode
     "demo": ["demo/demo.xml",],

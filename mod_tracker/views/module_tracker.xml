@@ -18,17 +18,24 @@
       <field name="arch" type="xml">
         <form string="Module Information">
           <sheet>
+          <group string= "Module Name">
+            <group>
+              <h2>
+                <field name="mod_name" placeholder="Module Name" />
+              </h2>
+              </group>
+            </group>
             <group>
               <group>
-                <field name="mod_name"/>
-                <field name="module_type"/>
+                <field name="module_type" placeholder="Module Type"/>
                 <field name="project_id" />
+                <field name="customer_id"/>
                 <field name="prim_designer_id"/>
                 <field name="prim_category_id"/>
-                <field name="customer_id"/>
+                <field name="prim_developer_id"/>
+                <field name="mod_description" placeholder="Summary"/>
                 </group>
                 <group>
-                <field name="prim_developer_id"/>
                 <field name="contributor_ids" widget="many2many_tags" placeholder="Developers and Contributors"/>
                 <field name="repo_url" widget="url"/>
                 <field name="rel_date"/>
@@ -38,7 +45,7 @@
                 <field name="special_circum" placeholder="Special Circumstances"/>
               </group>
             </group>
-            <field name="mod_description" placeholder="Summary"/>
+            
           </sheet>
           <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers"/>
@@ -54,6 +61,7 @@
       <field name="arch" type="xml">
         <search>
             <field name="mod_name"/>
+            <field name="mod_description"/>
             <field name="module_type"/>
             <field name="project_id" />
             <field name="prim_designer_id"/>
