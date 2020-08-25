@@ -1,11 +1,9 @@
 from odoo.tests.common import TransactionCase, tagged
-from odoo.modules.module import get_module_resource
 
 
-@tagged("-at_install", "post_install")
 class TestMtCases(TransactionCase):
-    def setUp(self):
-        super(TestMtCases, self).setUp()
+    def setUp(self, *args, **kwargs):
+        super(TestMtCases, self).setUp(*args, **kwargs)
 
         self.module_tracker = self.env["module.tracker"].create(
             {
@@ -19,6 +17,5 @@ class TestMtCases(TransactionCase):
             }
         )
 
-    def test_Mt_Creation(self):
-        self.assertEqual(self.module_track.mod_name, "name")
-        self.assertEqual(self.module_track.mod_description, "description")
+    def test_mt_creation(self):
+        self.assertEqual(self.module_tracker.mod_name, "name")

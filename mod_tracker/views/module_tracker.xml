@@ -27,22 +27,22 @@
             </group>
             <group>
               <group>
-                <field name="module_type" placeholder="Module Type"/>
-                <field name="project_id" />
-                <field name="customer_id"/>
-                <field name="prim_designer_id"/>
+                <field name="module_type"/>
+                <field name="project_id"  options="{'no_create_edit': True}"/>
+                <field name="customer_id" options="{'no_create_edit': True}"/>
+                <field name="prim_designer_id" options="{'no_create_edit': True}"/>
                 <field name="prim_category_id"/>
-                <field name="prim_developer_id"/>
+                <field name="prim_developer_id" options="{'no_create_edit': True}"/>
                 <field name="mod_description" placeholder="Summary"/>
                 </group>
                 <group>
-                <field name="contributor_ids" widget="many2many_tags" placeholder="Developers and Contributors"/>
+                <field name="contributor_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
                 <field name="repo_url" widget="url"/>
                 <field name="rel_date"/>
                 <field name="version_sup"/>
                 <field name="dependencies"/>
-                <field name="add_category_ids" widget="many2many_tags" placeholder="Additional Categories"/>
-                <field name="special_circum" placeholder="Special Circumstances"/>
+                <field name="add_category_ids" widget="many2many_tags" placeholder="Non-Primary Categories"/>
+                <field name="special_circum" />
               </group>
             </group>
             
