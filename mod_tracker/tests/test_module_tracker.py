@@ -1,21 +1,44 @@
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests.common import TransactionCase
 
 
 class TestMtCases(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestMtCases, self).setUp(*args, **kwargs)
 
-        self.module_tracker = self.env["module.tracker"].create(
-            {
-                "mod_name": "name",
-                "mod_description": "description",
-                "module_type": "public",
-                "repo_url": "https://github.com/",
-                "rel_date": "2020-08-10",
-                "customer_id": self.env.ref("base.main_company").id,
-                "project_id": self.env.ref("project.project_project_1").id,
-            }
+        # create a category instance
+        self.category = self.env["module.category"].create({"name": "category"})
+
+        # create a module tracker instance
+        self.mod_tracker = self.env["module.tracker"].create(
+            {"mod_name": "name", "mod_description": "description",}
         )
 
+    # check if module name and description set properly
     def test_mt_creation(self):
-        self.assertEqual(self.module_tracker.mod_name, "name")
+        self.assertEqual(self.mod_tracker.mod_name, "name")
+        self.assertEqual(self.mod_tracker.mod_description, "description")
+
+    # unlink the record and check if it exists. it should not exists.
+    def test_mt_delete(self):
+        self.mod_tracker.unlink()
+        self.assertFalse(self.mod_tracker.exists())
+
+    # link category record with mod_tracker record
+    def test_mt_update(self):
+        self.mod_tracker.prim_category_id = self.category.id
+        self.assertEqual(self.mod_tracker.prim_category_id.name, "category")
+
+    # NOTE: Linked to demo data record will not work in practical use
+    # links a project to the record and autofills the customer with onchange method
+    def test_mt_onchange(self):
+        self.mod_tracker.project_id = (
+            self.env["project.project"].search([("name", "=", "Office Design")]).id
+        )
+        # trigger onchange method that fills in customer based off project selection
+        self.mod_tracker._onchange_from_project()
+        self.assertEqual(
+            self.mod_tracker.customer_id,
+            self.env["project.project"]
+            .search([("name", "=", "Office Design")])
+            .partner_id,
+        )
