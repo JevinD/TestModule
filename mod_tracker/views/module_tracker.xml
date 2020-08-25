@@ -143,7 +143,7 @@
 
     <menuitem id="module_tracker_menu_root"
         name="Module Tracker"  
-        web_icon ="module_tracker,static/description/icon.png" 
+        web_icon ="mod_tracker,static/description/icon.png" 
         sequence="0"/>
 
     <!-- menu categories -->
