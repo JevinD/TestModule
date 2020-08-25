@@ -12,8 +12,6 @@
           <record id="category4" model="module.category">
             <field name="name">Contract</field>
           </record>
-          <record id="category5" model="module.category">
-            <field name="name">Helpdesk</field>
-          </record>
+
   </data>
 </odoo>

@@ -42,10 +42,10 @@
                 <field name="module_type">public</field>
                 <field name="project_id" ref="project.project_project_2"/>
                 <field name="prim_designer_id" ref="hr.employee_qdp"/>
-                <field name="prim_category_id" ref="category5"/>
+                <field name="prim_category_id" ref="category4"/>
                 <field name="customer_id" ref="base.res_partner_12"/>
                 <field name="prim_developer_id" ref="hr.employee_fme"/>
-                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_qdp'), ref('hr.employee_fme')])]"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_fpi'), ref('hr.employee_jth')])]"/>
                 <field name="repo_url">https://github.com/ursais/osi-addons/blob/12.0/agreement_helpdesk</field>
                 <field name="rel_date">2020-08-14</field>
                 <field name="version_sup">12</field>
