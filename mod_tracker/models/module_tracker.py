@@ -10,7 +10,11 @@ class moduleTracker(models.Model):
     mod_name = fields.Char(
         string="Module Name", required=(True), track_visibility="always",
     )
-    mod_description = fields.Text(string="Summary", track_visibility="always",)
+    mod_description = fields.Text(
+        string="Summary",
+        track_visibility="always",
+        help="located in the __manifest__.py file under summary",
+    )
     module_type = fields.Selection(
         [("public", "Public"), ("private", "Private")],
         string="Module Type",
@@ -33,35 +37,73 @@ class moduleTracker(models.Model):
         track_visibility="always",
     )
     # possible create a configuration menu with the set numbers
-    version_sup = fields.Char(string="Supported Versions", track_visibility="always",)
-    prim_designer = fields.Many2one(
+    version_sup = fields.Char(
+        string="Supported Versions",
+        track_visibility="always",
+        help="located in the __manifest__.py file",
+    )
+    prim_designer_id = fields.Many2one(
         "hr.employee",
         ondelete="cascade",
         string="Primary Designer",
         track_visibility="always",
     )
-    prim_developer = fields.Many2one(
+    prim_developer_id = fields.Many2one(
         "hr.employee",
         ondelete="cascade",
         string="Primary Developer",
         track_visibility="always",
     )
     contributor_ids = fields.Many2many(
-        "hr.employee", string="Contributors", track_visibility="always",
+        "hr.employee",
+        string="Contributors",
+        track_visibility="always",
+        help="Additional Developers, Designers and Contributors can be listed here",
     )
-    dependencies = fields.Char(string="Dependencies", track_visibility="always",)
-    special_circum = fields.Char(string="Special", track_visibility="always",)
-    # config = fields.?
+    dependencies = fields.Char(
+        string="Dependencies",
+        track_visibility="always",
+        help="located in the __manifest__.py file",
+    )
+    special_circum = fields.Char(string="Special Cases", track_visibility="always",)
 
-    # will need to be set in data file
-    # returns the relationship not the name yet
     prim_category_id = fields.Many2one(
         "module.category", string="Primary Category", track_visibility="always",
     )
-    # NOTE: DOES NOT TRACK THIS
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
     add_category_ids = fields.Many2many(
-        "module.category", string="Categories", track_visibility="always",
+        "module.category", string="Additional Categories", track_visibility="always",
     )
+
+    @api.onchange("project_id")
+    def _onchange_from_project(self):
+        for r in self:
+            if self.project_id:
+                self.customer_id = self.project_id.partner_id
+
+    @api.constrains("prim_category_id", "add_category_ids")
+    def _check_prim_category_not_in_add_categories(self):
+        for r in self:
+            if r.prim_category_id and r.prim_category_id in r.add_category_ids:
+                raise exceptions.ValidationError(
+                    "Primary Category can not be used in additional categories"
+                )
+
+    @api.constrains("prim_developer_id", "contributor_ids")
+    def _check_prim_developer_not_in_add_contributors(self):
+        for r in self:
+            if r.prim_developer_id and r.prim_developer_id in r.contributor_ids:
+                raise exceptions.ValidationError(
+                    "Primary Developer can not be used in additional contributors/developers"
+                )
+
+    @api.constrains("prim_designer_id", "contributor_ids")
+    def _check_prim_designer_not_in_add_contributors(self):
+        for r in self:
+            if r.prim_designer_id and r.prim_designer_id in r.contributor_ids:
+                raise exceptions.ValidationError(
+                    "Primary Designer can not be used in additional contributors/developers"
+                )
 
 
 class Category(models.Model):
