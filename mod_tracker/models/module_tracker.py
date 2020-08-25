@@ -75,6 +75,12 @@ class moduleTracker(models.Model):
         "module.category", string="Additional Categories", track_visibility="always",
     )
 
+    @api.onchange("project_id")
+    def _onchange_from_project(self):
+        for r in self:
+            if self.project_id:
+                self.customer_id = self.project_id.partner_id
+
     @api.constrains("prim_category_id", "add_category_ids")
     def _check_prim_category_not_in_add_categories(self):
         for r in self:
