@@ -12,6 +12,37 @@
           <record id="category4" model="module.category">
             <field name="name">Contract</field>
           </record>
+          
+          <record id="version9" model="module.version">
+            <field name="name">9</field>
+          </record>
+          <record id="version10" model="module.version">
+            <field name="name">10</field>
+          </record>
+          <record id="version11" model="module.version">
+            <field name="name">11</field>
+          </record>
+          <record id="version12" model="module.version">
+            <field name="name">12</field>
+          </record>
+          <record id="version13" model="module.version">
+            <field name="name">13</field>
+          </record>
+          <record id="version14" model="module.version">
+            <field name="name">14</field>
+          </record>
 
+          <record id="dependency1" model="module.depend">
+            <field name="name">account</field>
+          </record>
+          <record id="dependency2" model="module.depend">
+            <field name="name">purchase</field>
+          </record>        
+          <record id="dependency3" model="module.depend">
+            <field name="name">sale</field>
+          </record>
+          <record id="dependency4" model="module.depend">
+            <field name="name">stock</field>
+          </record>
   </data>
 </odoo>

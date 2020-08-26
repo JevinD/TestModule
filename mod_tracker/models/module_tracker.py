@@ -23,6 +23,11 @@ class moduleTracker(models.Model):
     repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
     rel_date = fields.Date(string="Release Date", track_visibility="always",)
 
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(mod_name)", "The Module Name must be unique"),
+        ("url_unique", "UNIQUE(repo_url)", "The Github URL must be unique"),
+    ]
+
     customer_id = fields.Many2one(
         "res.partner",
         ondelete="set null",
@@ -36,8 +41,9 @@ class moduleTracker(models.Model):
         string="Project",
         track_visibility="always",
     )
-    # possible create a configuration menu with the set numbers
-    version_sup = fields.Char(
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
+    version_sup_ids = fields.Many2many(
+        "module.version",
         string="Supported Versions",
         track_visibility="always",
         help="located in the __manifest__.py file",
@@ -54,15 +60,18 @@ class moduleTracker(models.Model):
         string="Primary Developer",
         track_visibility="always",
     )
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
     contributor_ids = fields.Many2many(
         "hr.employee",
         string="Contributors",
-        track_visibility="always",
+        track_visibility="onchange",
         help="Additional Developers, Designers and Contributors can be listed here",
     )
-    dependencies = fields.Char(
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
+    dependency_ids = fields.Many2many(
+        "module.depend",
         string="Dependencies",
-        track_visibility="always",
+        track_visibility="onchange",
         help="located in the __manifest__.py file",
     )
     special_circum = fields.Char(string="Special Cases", track_visibility="always",)
@@ -113,3 +122,39 @@ class Category(models.Model):
     name = fields.Char(string="Category Name", required=(True))
 
     module_category_ids = fields.One2many("module.tracker", "prim_category_id",)
+
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(name)", "The Category Name must be unique"),
+    ]
+
+
+class Dependency(models.Model):
+    _name = "module.depend"
+    _description = "stores Dependency names for reduced repeating of module categories"
+
+    name = fields.Char(string="Dependency Name", required=(True))
+
+    module_dependency_ids = fields.Many2many("module.tracker")
+
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(name)", "The Dependency Name must be unique"),
+    ]
+
+
+class SupportedVersion(models.Model):
+    _name = "module.version"
+    _description = "stores version numbers for no repeating of version numbers"
+
+    name = fields.Float(string="Dependency version", required=(True))
+
+    module_version_ids = fields.One2many("module.tracker", "version_sup_ids")
+
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(name)", "The Version must be unique"),
+    ]
+
+    @api.constrains("name")
+    def _check_version_not_negative(self):
+        for r in self:
+            if r.name < 0:
+                raise exceptions.ValidationError("version number can not be negative")
