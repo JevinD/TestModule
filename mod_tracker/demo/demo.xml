@@ -54,6 +54,59 @@
                <!-- <field name="special_circum"></field> -->
                 <field name="mod_description">Link a helpdesk ticket to an agreement</field>
           </record>
-          
+
+          <record id="module4" model="module.tracker">
+                <field name="mod_name">osi_scrap_reason_code</field>
+                <field name="module_type">public</field>
+                <field name="project_id" ref="project.project_project_1"/>
+                <field name="prim_designer_id" ref="hr.employee_hne"/>
+                <field name="prim_category_id" ref="category1"/>
+                <field name="customer_id" ref="base.res_partner_10"/>
+                <field name="prim_developer_id" ref="hr.employee_hne"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_mit'), ref('hr.employee_chs')])]"/>
+                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/osi_scrap_reason_code</field>
+                <field name="rel_date">2020-09-3</field>
+                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
+                <field name="dependencies">'account','purchase','sale','stock'</field>
+                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
+               <!-- <field name="special_circum">Beta Stage</field> -->
+                <field name="mod_description">Provide a user-defined list of scrapping reasons</field>
+          </record>
+
+          <record id="module5" model="module.tracker">
+                <field name="mod_name">stock_picking_sms</field>
+                <field name="module_type">public</field>
+                <field name="project_id" ref="project.project_project_1"/>
+                <field name="prim_designer_id" ref="hr.employee_fme"/>
+                <field name="prim_category_id" ref="category1"/>
+                <field name="customer_id" ref="base.res_partner_10"/>
+                <field name="prim_developer_id" ref="hr.employee_fme"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_hne'), ref('hr.employee_chs')])]"/>
+                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/stock_picking_sms</field>
+                <field name="rel_date">2020-09-3</field>
+                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
+                <field name="dependencies">'account','purchase','sale','stock'</field>
+                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
+               <!-- <field name="special_circum">Beta Stage</field> -->
+                <!-- <field name="mod_description"></field> -->
+          </record>
+
+          <record id="module6" model="module.tracker">
+                <field name="mod_name">sale_subscription_brand</field>
+                <field name="module_type">public</field>
+                <field name="project_id" ref="project.project_project_1"/>
+                <field name="prim_designer_id" ref="hr.employee_hne"/>
+                <field name="prim_category_id" ref="category1"/>
+                <field name="customer_id" ref="base.res_partner_10"/>
+                <field name="prim_developer_id" ref="hr.employee_hne"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_mit'), ref('hr.employee_chs')])]"/>
+                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/picking_sms</field>
+                <field name="rel_date">2020-09-3</field>
+                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
+                <field name="dependencies">'account','purchase','sale','stock'</field>
+                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
+               <!-- <field name="special_circum">Beta Stage</field> -->
+                <!-- <field name="mod_description"></field> -->
+          </record>
   </data>
 </odoo>

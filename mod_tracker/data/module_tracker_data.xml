@@ -31,5 +31,6 @@
           <record id="version14" model="module.version">
             <field name="name">14</field>
           </record>
+          
   </data>
 </odoo>

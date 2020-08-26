@@ -14,5 +14,5 @@ class Contributors(models.Model):
         readonly=True,
     )
     module_contributor_ids = fields.Many2many(
-        "module.tracker", "contributor_ids", string="Contributed", readonly=True
+        "module.tracker", string="Contributed", readonly=True
     )
