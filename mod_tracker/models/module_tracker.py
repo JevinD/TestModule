@@ -140,5 +140,5 @@ class SupportedVersion(models.Model):
     @api.constrains("name")
     def _check_version_not_negative(self):
         for r in self:
-            if r.name <= 0:
+            if r.name < 0:
                 raise exceptions.ValidationError("version number can not be negative")
