@@ -39,7 +39,7 @@
                 <field name="contributor_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
                 <field name="repo_url" widget="url"/>
                 <field name="rel_date"/>
-                <field name="version_sup"/>
+                <field name="version_sup_ids"/>
                 <field name="dependencies"/>
                 <field name="add_category_ids" widget="many2many_tags" placeholder="Non-Primary Categories"/>
                 <field name="special_circum" />
@@ -71,7 +71,7 @@
             <field name="contributor_ids"/>
             <field name="repo_url"/>
             <field name="rel_date"/>
-            <field name="version_sup"/>
+            <field name="version_sup_ids"/>
             <field name="dependencies"/>
             <field name="add_category_ids"/>
             <field name="special_circum"/>
@@ -102,6 +102,7 @@
       </field>
     </record>  
   <!-- Configuration -->
+  <!--  Category -->
     <record id="view_module_tracker_category_tree" model="ir.ui.view" >
       <field name="name">module.tracker.category.tree</field>
       <field name="model">module.category</field>
@@ -138,7 +139,43 @@
         </p>
       </field>
     </record>  
+    <!-- versions support -->
+    <record id="view_module_tracker_version_tree" model="ir.ui.view" >
+      <field name="name">module.tracker.version.tree</field>
+      <field name="model">module.version</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
 
+    <record id="view_module_tracker_version_form" model="ir.ui.view">
+      <field name="name">module.tracker.version.form</field>
+      <field name="model">module.version</field>
+      <field name="arch" type="xml">
+        <form string="Version number">
+          <sheet>
+          <group>
+          <group col="1">
+            <field name="name" />
+          </group>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_module_tracker_version" model="ir.actions.act_window" >
+      <field name="name">Version numbers</field>
+      <field name="res_model">module.version</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add a Version number
+        </p>
+      </field>
+    </record>  
 <!--________________________________Top menu item____________________________________-->
 
     <menuitem id="module_tracker_menu_root"

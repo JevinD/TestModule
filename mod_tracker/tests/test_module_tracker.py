@@ -3,6 +3,9 @@ from odoo.tests.common import TransactionCase
 
 class TestMtCases(TransactionCase):
     def setUp(self, *args, **kwargs):
+        """
+            Creates and instance record for category and module tracker.
+        """
         super(TestMtCases, self).setUp(*args, **kwargs)
 
         # create a category instance
@@ -24,8 +27,11 @@ class TestMtCases(TransactionCase):
         self.assertFalse(self.mod_tracker.exists())
 
     # link category record with mod_tracker record
+    # change name
     def test_mt_update(self):
         self.mod_tracker.prim_category_id = self.category.id
+        self.mod_tracker.mod_name = "name change"
+        self.assertEqual(self.mod_tracker.mod_name, "name change")
         self.assertEqual(self.mod_tracker.prim_category_id.name, "category")
 
     # NOTE: Linked to demo data record will not work in practical use

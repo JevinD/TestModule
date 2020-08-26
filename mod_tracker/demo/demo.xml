@@ -12,7 +12,7 @@
                 <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_mit'), ref('hr.employee_chs')])]"/>
                 <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/account_default_payment_method</field>
                 <field name="rel_date">2020-09-3</field>
-                <field name="version_sup">12,13</field>
+                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
                 <field name="dependencies">'account','purchase','sale','stock'</field>
                 <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
                <field name="special_circum">Beta Stage</field>
@@ -30,7 +30,7 @@
                 <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_qdp'), ref('hr.employee_fme')])]"/>
                 <field name="repo_url">https://github.com/ursais/osi-addons/blob/12.0/agreement_rma/</field>
                 <field name="rel_date">2020-08-14</field>
-                <field name="version_sup">12</field>
+                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
                 <field name="dependencies">'agreement_serviceprofile','rma'</field>
                 <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category1')])]"/>
                <!-- <field name="special_circum"></field> -->
@@ -48,7 +48,7 @@
                 <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_fpi'), ref('hr.employee_jth')])]"/>
                 <field name="repo_url">https://github.com/ursais/osi-addons/blob/12.0/agreement_helpdesk</field>
                 <field name="rel_date">2020-08-14</field>
-                <field name="version_sup">12</field>
+                <field name="version_sup_ids" eval="[(6,0,[ref('version10'), ref('version11')])]"/>
                 <field name="dependencies">"helpdesk","agreement_serviceprofile"</field>
                 <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category1')])]"/>
                <!-- <field name="special_circum"></field> -->
