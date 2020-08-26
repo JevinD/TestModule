@@ -41,7 +41,7 @@ class moduleTracker(models.Model):
         string="Project",
         track_visibility="always",
     )
-    # possible create a configuration menu with the set numbers
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
     version_sup_ids = fields.Many2many(
         "module.version",
         string="Supported Versions",
@@ -60,15 +60,18 @@ class moduleTracker(models.Model):
         string="Primary Developer",
         track_visibility="always",
     )
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
     contributor_ids = fields.Many2many(
         "hr.employee",
         string="Contributors",
-        track_visibility="always",
+        track_visibility="onchange",
         help="Additional Developers, Designers and Contributors can be listed here",
     )
-    dependencies = fields.Char(
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
+    dependency_ids = fields.Many2many(
+        "module.depend",
         string="Dependencies",
-        track_visibility="always",
+        track_visibility="onchange",
         help="located in the __manifest__.py file",
     )
     special_circum = fields.Char(string="Special Cases", track_visibility="always",)
@@ -122,6 +125,19 @@ class Category(models.Model):
 
     _sql_constraints = [
         ("name_unique", "UNIQUE(name)", "The Category Name must be unique"),
+    ]
+
+
+class Dependency(models.Model):
+    _name = "module.depend"
+    _description = "stores Dependency names for reduced repeating of module categories"
+
+    name = fields.Char(string="Dependency Name", required=(True))
+
+    module_dependency_ids = fields.Many2many("module.tracker")
+
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(name)", "The Dependency Name must be unique"),
     ]
 
 

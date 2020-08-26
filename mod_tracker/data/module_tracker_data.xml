@@ -31,6 +31,18 @@
           <record id="version14" model="module.version">
             <field name="name">14</field>
           </record>
-          
+
+          <record id="dependency1" model="module.depend">
+            <field name="name">account</field>
+          </record>
+          <record id="dependency2" model="module.depend">
+            <field name="name">purchase</field>
+          </record>        
+          <record id="dependency3" model="module.depend">
+            <field name="name">sale</field>
+          </record>
+          <record id="dependency4" model="module.depend">
+            <field name="name">stock</field>
+          </record>
   </data>
 </odoo>
