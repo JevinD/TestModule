@@ -39,7 +39,7 @@
                 <field name="contributor_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
                 <field name="repo_url" widget="url"/>
                 <field name="rel_date"/>
-                <field name="version_sup_ids"/>
+                <field name="version_sup_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
                 <field name="dependencies"/>
                 <field name="add_category_ids" widget="many2many_tags" placeholder="Non-Primary Categories"/>
                 <field name="special_circum" />
@@ -158,7 +158,7 @@
           <sheet>
           <group>
           <group col="1">
-            <field name="name" />
+            <field name="name"/>
           </group>
           </group>
           </sheet>
@@ -201,5 +201,10 @@
         parent="module_tracker_menu_config"
         action="action_module_tracker_category"
         sequence="1"/>
+    <menuitem id="module_tracker_menu_version" 
+        name="Versions" 
+        parent="module_tracker_menu_config"
+        action="action_module_tracker_version"
+        sequence="2"/>
   </data>
 </odoo>

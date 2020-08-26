@@ -136,3 +136,9 @@ class SupportedVersion(models.Model):
     _sql_constraints = [
         ("name_unique", "UNIQUE(name)", "The Version must be unique"),
     ]
+
+    @api.constrains("name")
+    def _check_version_not_negative(self):
+        for r in self:
+            if r.name <= 0:
+                raise exceptions.ValidationError("version number can not be negative")
