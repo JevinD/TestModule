@@ -23,12 +23,6 @@ class moduleTracker(models.Model):
     repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
     rel_date = fields.Date(string="Release Date", track_visibility="always",)
 
-    # A module can be re-used in multiple projects should the module name & URL be unique?
-    _sql_constraints = [
-        ("name_unique", "UNIQUE(mod_name)", "The Module Name must be unique"),
-        ("url_unique", "UNIQUE(repo_url)", "The Github URL must be unique"),
-    ]
-
     customer_id = fields.Many2one(
         "res.partner",
         ondelete="set null",
