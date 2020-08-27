@@ -168,7 +168,7 @@
     </record>
 
     <record id="action_module_tracker_depend" model="ir.actions.act_window" >
-      <field name="name">depend</field>
+      <field name="name">Dependencies</field>
       <field name="res_model">module.depend</field>
       <field name="view_mode">tree,form</field>
       <field name="help" type="html">
