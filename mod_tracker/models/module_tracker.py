@@ -29,14 +29,15 @@ class moduleTracker(models.Model):
         ("url_unique", "UNIQUE(repo_url)", "The Github URL must be unique"),
     ]
 
-    customer_id = fields.Many2one(
+    customer_ids = fields.Many2many(
         "res.partner",
         ondelete="set null",
         string="Customer",
         track_visibility="always",
+        readonly=True,
     )
 
-    project_id = fields.Many2one(
+    project_ids = fields.Many2many(
         "project.project",
         ondelete="cascade",
         string="Project",
@@ -84,12 +85,24 @@ class moduleTracker(models.Model):
     add_category_ids = fields.Many2many(
         "module.category", string="Additional Categories", track_visibility="always",
     )
-
-    @api.onchange("project_id")
+    # NOTE: m2m onchange to m2m
+    """
+    @api.onchange("project_ids")
     def _onchange_from_project(self):
         for r in self:
-            if r.project_id:
-                r.customer_id = r.project_id.partner_id
+            if r.project_ids:
+                r.customer_ids = r.project_ids.partner_id
+    """
+    """
+    @api.multi
+    def write(self, vals):
+            for r in self.project_ids:
+                print("\n")
+                print(r)
+                print("\n")
+                r.customer_ids = r.project_ids.partner_id
+        return super(moduleTracker, self).write(vals)
+    """
 
     @api.constrains("prim_category_id", "add_category_ids")
     def _check_prim_category_not_in_add_categories(self):
