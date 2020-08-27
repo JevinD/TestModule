@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 
-class Customer(models.Model):
+class Partner(models.Model):
     _inherit = "res.partner"
 
     module_customer_ids = fields.One2many(

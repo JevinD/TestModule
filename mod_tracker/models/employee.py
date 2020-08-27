@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 
-class Contributors(models.Model):
+class Employee(models.Model):
     _inherit = "hr.employee"
 
     module_primary_ids = fields.One2many(
