@@ -2,7 +2,7 @@ from odoo import fields, models, api, exceptions, _
 from datetime import timedelta
 
 
-class moduleTracker(models.Model):
+class ModuleTracker(models.Model):
     _name = "module.tracker"
     _description = "Keeps track of OSI public and private modules"
     _inherit = ["mail.thread", "mail.activity.mixin"]
@@ -28,12 +28,14 @@ class moduleTracker(models.Model):
         ondelete="set null",
         string="Customer",
         track_visibility="always",
+        domain="[('is_company','=','True'),('customer', '=', 'True')]",
     )
 
     project_id = fields.Many2one(
         "project.project",
         ondelete="cascade",
         string="Project",
+        required=(True),
         track_visibility="always",
     )
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
