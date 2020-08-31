@@ -2,7 +2,6 @@
 <odoo>
        
     <record id="view_module_tracker_tree" model="ir.ui.view" >
-<<<<<<< HEAD
       <field name="name">module.tracker.tree</field>
       <field name="model">module.tracker</field>
       <field name="arch" type="xml">
@@ -102,94 +101,6 @@
             </group>
         </search>
       </field>
-=======
-        <field name="name">module.tracker.tree</field>
-        <field name="model">module.tracker</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="mod_name"/>
-                <field name="prim_category_id"/>
-                <field name="project_id"/>
-                <field name="module_type"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_module_tracker_form" model="ir.ui.view">
-        <field name="name">module.tracker.form</field>
-        <field name="model">module.tracker</field>
-        <field name="arch" type="xml">
-            <form string="Module Information">
-                <sheet>
-                    <group string= "Module Name">
-                        <group>
-                            <h2>
-                            <field name="mod_name" placeholder="Module Name" />
-                            </h2>
-                        </group>
-                    </group>
-                    <group>
-                        <group>
-                            <field name="module_type"/>
-                            <field name="project_id"  options="{'no_create_edit': True}"/>
-                            <field name="prim_category_id" options="{'no_create_edit': True}"/>
-                            <field name="customer_id" options="{'no_create_edit': True}"/>
-                            <field name="prim_designer_id" options="{'no_create_edit': True}"/>
-                            <field name="prim_developer_id" options="{'no_create_edit': True}"/>
-                            <field name="mod_description" placeholder="Summary"/>
-                        </group>
-                        <group>
-                            <field name="contributor_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
-                            <field name="repo_url" widget="url"/>
-                            <field name="rel_date"/>
-                            <field name="version_sup_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
-                            <field name="dependency_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
-                            <field name="add_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Categories"/>
-                            <field name="special_circum" />
-                        </group>
-                    </group>
-                </sheet>
-                <div class="oe_chatter">
-                <field name="message_follower_ids" widget="mail_followers"/>
-                <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
-                </div>
-            </form>
-        </field>
-    </record>
-
-    <record id="view_module_tracker_search" model="ir.ui.view" >
-        <field name="name">module.tracker.search</field>
-        <field name="model">module.tracker</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="mod_name"/>
-                <field name="mod_description"/>
-                <field name="module_type"/>
-                <field name="project_id" />
-                <field name="prim_designer_id"/>
-                <field name="prim_category_id"/>
-                <field name="customer_id"/>
-                <field name="prim_developer_id"/>
-                <field name="contributor_ids"/>
-                <field name="repo_url"/>
-                <field name="rel_date"/>
-                <field name="version_sup_ids"/>
-                <field name="dependency_ids"/>
-                <field name="add_category_ids"/>
-                <field name="special_circum"/>
-                <group string="Group By">
-                    <filter name="by_customer" string="Customer"
-                            context="{'group_by': 'customer_id'}"/>
-                    <filter name="by_designer" string="Primary Designer"
-                            context="{'group_by': 'prim_designer_id'}"/>  
-                    <filter name="by_developer" string="Primary Developer"
-                            context="{'group_by': 'prim_developer_id'}"/>
-                    <filter name="by_category" string="Primary Category"
-                            context="{'group_by': 'prim_category_id'}"/>
-                </group>
-            </search>
-        </field>
->>>>>>> master
     </record>
 
     <record id="action_module_tracker" model="ir.actions.act_window" >
@@ -281,7 +192,6 @@
 
 <!-- versions support -->
     <record id="view_module_tracker_version_tree" model="ir.ui.view" >
-<<<<<<< HEAD
       <field name="name">module.tracker.version.tree</field>
       <field name="model">module.version</field>
       <field name="arch" type="xml">
@@ -318,31 +228,6 @@
           </sheet>
         </form>
       </field>
-=======
-        <field name="name">module.tracker.version.tree</field>
-        <field name="model">module.version</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_module_tracker_version_form" model="ir.ui.view">
-        <field name="name">module.tracker.version.form</field>
-        <field name="model">module.version</field>
-        <field name="arch" type="xml">
-            <form string="Version number">
-                <sheet>
-                    <group>
-                        <group col="1">
-                            <field name="name"/>
-                        </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
->>>>>>> master
     </record>
 
     <record id="action_module_tracker_version" model="ir.actions.act_window" >

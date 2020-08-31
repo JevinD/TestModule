@@ -30,28 +30,10 @@ class ModuleTracker(models.Model):
         track_visibility="always",
     )
 
-<<<<<<< HEAD
     _sql_constraints = [
         ("name_unique", "UNIQUE(mod_name)", "The Module Name must be unique")
     ]
 
-=======
-    customer_id = fields.Many2one(
-        "res.partner",
-        ondelete="set null",
-        string="Customer",
-        track_visibility="always",
-        domain="[('is_company','=','True'),('customer', '=', 'True')]",
-    )
-
-    project_id = fields.Many2one(
-        "project.project",
-        ondelete="cascade",
-        string="Project",
-        required=(True),
-        track_visibility="always",
-    )
->>>>>>> master
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
     version_ids = fields.Many2many(
         "module.version",
@@ -94,7 +76,6 @@ class ModuleTracker(models.Model):
     add_category_ids = fields.Many2many(
         "module.category", string="Additional Categories", track_visibility="always",
     )
-<<<<<<< HEAD
     # NOTE: m2m onchange to m2m
 
     """
@@ -107,14 +88,6 @@ class ModuleTracker(models.Model):
                 r.customer_ids = r.project_ids.partner_id
         return super(moduleTracker, self).write(vals)
     """
-=======
-
-    @api.onchange("project_id")
-    def _onchange_from_project(self):
-        for rec in self:
-            if rec.project_id:
-                rec.customer_id = rec.project_id.partner_id
->>>>>>> master
 
     @api.constrains("prim_category_id", "add_category_ids")
     def _check_prim_category_not_in_add_categories(self):
