@@ -52,8 +52,12 @@
                 <field name="version_ids" options="{'no_create_edit': True}"/>
             </page>
             <page string="Description">
-                <field name="mod_description" placeholder="Description"/>
-                <field name="special_circum" />
+            <group>
+                <group>
+                    <field name="mod_description" placeholder="Description"/>
+                    <field name="special_circum" />
+                </group>
+            </group>
             </page>
             <page string="Internal Notes">
               <field name="notes" placeholder="Notes"/>
@@ -193,12 +197,12 @@
 <!-- versions support -->
     <record id="view_module_tracker_version_tree" model="ir.ui.view" >
       <field name="name">module.tracker.version.tree</field>
-      <field name="model">module.version</field>
+      <field name="model">module.tracker.version</field>
       <field name="arch" type="xml">
         <tree>
             <field name="name"/>
-            <field name="project_id"/>
-            <field name="customer_id"/>
+            <field name="project_ids"/>
+            <field name="customer_ids"/>
             <field name="repo_url" widget="url"/>
             <field name="rel_date"/>
         </tree>
@@ -207,22 +211,26 @@
 
     <record id="view_module_tracker_version_form" model="ir.ui.view">
       <field name="name">module.tracker.version.form</field>
-      <field name="model">module.version</field>
+      <field name="model">module.tracker.version</field>
       <field name="arch" type="xml">
         <form string="Version number">
           <sheet>
           <group>
           <group col="1">
             <field name="name"/>
-            <field name="project_id"/>
-            <field name="customer_id"/>
+            <field name="project_ids"/>
+            <field name="customer_ids"/>
             <field name="repo_url" widget="url"/>
             <field name="rel_date"/>
           </group>
           </group>
           <notebook>
             <page string="Comment">
-                <field name="comment" />
+             <group>
+                <group>
+                    <field name="comment" />
+                </group>
+            </group>
             </page>
           </notebook>
           </sheet>
@@ -232,7 +240,7 @@
 
     <record id="action_module_tracker_version" model="ir.actions.act_window" >
         <field name="name">Version numbers</field>
-        <field name="res_model">module.version</field>
+        <field name="res_model">module.tracker.version</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

@@ -35,8 +35,9 @@ class ModuleTracker(models.Model):
     ]
 
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
-    version_ids = fields.Many2many(
-        "module.version",
+    version_ids = fields.One2many(
+        "module.tracker.version",
+        "module_version_id",
         string="Module Versions",
         track_visibility="always",
         help="located in the __manifest__.py file",
@@ -141,23 +142,23 @@ class Dependency(models.Model):
 
 
 class ModuleVersion(models.Model):
-    _name = "module.version"
-    _description = "stores version numbers for no repeating of version numbers"
+    _name = "module.tracker.version"
+    _description = "stores versions of modules"
     _order = "name desc"
-    name = fields.Float(string="Dependency version", required=(True))
+    name = fields.Char(string="Dependency version", required=(True))
     repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
     rel_date = fields.Date(string="Release Date", track_visibility="always",)
     comment = fields.Text(string="Comment")
-    module_version_ids = fields.One2many("module.tracker", "version_ids")
+    module_version_id = fields.Many2one("module.tracker",)
 
-    project_id = fields.Many2one(
+    project_ids = fields.Many2many(
         "project.project",
         ondelete="cascade",
         string="Project",
         track_visibility="always",
     )
 
-    customer_id = fields.Many2one(
+    customer_ids = fields.Many2many(
         "res.partner",
         ondelete="set null",
         string="Customer",
@@ -170,8 +171,8 @@ class ModuleVersion(models.Model):
             if r.name < 0:
                 raise exceptions.ValidationError("version number can not be negative")
 
-    @api.onchange("project_id")
+    """     @api.onchange("project_id")
     def _onchange_from_project(self):
         for r in self:
             if r.project_id:
-                r.customer_id = r.project_id.partner_id
+                r.customer_id = r.project_id.partner_id """
