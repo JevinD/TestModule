@@ -10,61 +10,52 @@ class moduleTracker(models.Model):
     mod_name = fields.Char(
         string="Module Name", required=(True), track_visibility="always",
     )
-    mod_description = fields.Text(
-        string="Summary",
-        track_visibility="always",
-        help="located in the __manifest__.py file under summary",
+    image = fields.Binary(
+        "Photo",
+        attachment=True,
+        help="This field holds the image used for the module icon, limited to 1024x1024px.",
     )
+    mod_description = fields.Text(
+        string="Description",
+        track_visibility="always",
+        help="located in the __manifest__.py file under description",
+    )
+    active = fields.Boolean("Active?", default=True)
+    notes = fields.Text(string="Notes")
+    mod_summary = fields.Text(string="Summary", track_visibility="always",)
+
     module_type = fields.Selection(
         [("public", "Public"), ("private", "Private")],
         string="Module Type",
         track_visibility="always",
     )
-    repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
-    rel_date = fields.Date(string="Release Date", track_visibility="always",)
 
-    # A module can be re-used in multiple projects should the module name & URL be unique?
     _sql_constraints = [
-        ("name_unique", "UNIQUE(mod_name)", "The Module Name must be unique"),
-        ("url_unique", "UNIQUE(repo_url)", "The Github URL must be unique"),
+        ("name_unique", "UNIQUE(mod_name)", "The Module Name must be unique")
     ]
 
-    customer_ids = fields.Many2many(
-        "res.partner",
-        ondelete="set null",
-        string="Customer",
-        track_visibility="always",
-        readonly=True,
-    )
-
-    project_ids = fields.Many2many(
-        "project.project",
-        ondelete="cascade",
-        string="Project",
-        track_visibility="always",
-    )
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
-    version_sup_ids = fields.Many2many(
+    version_ids = fields.Many2many(
         "module.version",
-        string="Supported Versions",
+        string="Module Versions",
         track_visibility="always",
         help="located in the __manifest__.py file",
     )
     prim_designer_id = fields.Many2one(
-        "hr.employee",
+        "res.partner",
         ondelete="cascade",
         string="Primary Designer",
         track_visibility="always",
     )
     prim_developer_id = fields.Many2one(
-        "hr.employee",
+        "res.partner",
         ondelete="cascade",
         string="Primary Developer",
         track_visibility="always",
     )
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
     contributor_ids = fields.Many2many(
-        "hr.employee",
+        "res.partner",
         string="Contributors",
         track_visibility="onchange",
         help="Additional Developers, Designers and Contributors can be listed here",
@@ -86,13 +77,7 @@ class moduleTracker(models.Model):
         "module.category", string="Additional Categories", track_visibility="always",
     )
     # NOTE: m2m onchange to m2m
-    """
-    @api.onchange("project_ids")
-    def _onchange_from_project(self):
-        for r in self:
-            if r.project_ids:
-                r.customer_ids = r.project_ids.partner_id
-    """
+
     """
     @api.multi
     def write(self, vals):
@@ -155,20 +140,38 @@ class Dependency(models.Model):
     ]
 
 
-class SupportedVersion(models.Model):
+class ModuleVersion(models.Model):
     _name = "module.version"
     _description = "stores version numbers for no repeating of version numbers"
-
+    _order = "name desc"
     name = fields.Float(string="Dependency version", required=(True))
+    repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
+    rel_date = fields.Date(string="Release Date", track_visibility="always",)
+    comment = fields.Text(string="Comment")
+    module_version_ids = fields.One2many("module.tracker", "version_ids")
 
-    module_version_ids = fields.One2many("module.tracker", "version_sup_ids")
+    project_id = fields.Many2one(
+        "project.project",
+        ondelete="cascade",
+        string="Project",
+        track_visibility="always",
+    )
 
-    _sql_constraints = [
-        ("name_unique", "UNIQUE(name)", "The Version must be unique"),
-    ]
+    customer_id = fields.Many2one(
+        "res.partner",
+        ondelete="set null",
+        string="Customer",
+        track_visibility="always",
+    )
 
     @api.constrains("name")
     def _check_version_not_negative(self):
         for r in self:
             if r.name < 0:
                 raise exceptions.ValidationError("version number can not be negative")
+
+    @api.onchange("project_id")
+    def _onchange_from_project(self):
+        for r in self:
+            if r.project_id:
+                r.customer_id = r.project_id.partner_id

@@ -8,7 +8,7 @@
         <tree>
           <field name="mod_name"/>
           <field name="prim_category_id"/>
-          <field name="project_ids"/>
+        <!--   <field name="project_ids"/> -->
           <field name="module_type"/>
         </tree>
       </field>
@@ -20,35 +20,43 @@
       <field name="arch" type="xml">
         <form string="Module Information">
           <sheet>
-          <group string= "Module Name">
-            <group>
-              <h2>
-                <field name="mod_name" placeholder="Module Name" />
-              </h2>
-              </group>
-            </group>
-            <group>
+            <div class="oe_button_box" name="button_box">
+                <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                    <field name="active" widget="boolean_button"
+                    options='{"terminology": "archive"}'/>
+                </button>
+            </div>
+            <field name="image" widget='image' class ="oe_avatar" options = "{'size': [90,90]}" />
+            <h1>
+                <field name="mod_name" placeholder="Module Name" required="True" colspan="1"/>
+            </h1>
+            
+          <group>
+            <field name="mod_summary" placeholder="Summary"/>
               <group>
                 <field name="module_type"/>
-                <field name="project_ids"  options="{'no_create_edit': True}" widget="many2many_tags"/>
-                <field name="prim_category_id" options="{'no_create_edit': True}"/>
+<!--                 <field name="project_ids"  options="{'no_create_edit': True}" widget="many2many_tags"/>
+ -->                <field name="prim_category_id" options="{'no_create_edit': True}"/>
                 <field name="prim_designer_id" options="{'no_create_edit': True}"/>
                 <field name="prim_developer_id" options="{'no_create_edit': True}"/>
-                <field name="mod_description" placeholder="Summary"/>
+                
                 </group>
                 <group>
-                <field name="contributor_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
-                <field name="repo_url" widget="url"/>
-                <field name="rel_date"/>
-                <field name="version_sup_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                <field name="contributor_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/> 
                 <field name="dependency_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
                 <field name="add_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Categories"/>
-                <field name="special_circum" />
               </group>
             </group>
-            <notebook>
-            <page string="Customers">
-            <field name="customer_ids" options="{'no_create_edit': True}" />
+             <notebook>
+            <page string="Module Updates">
+                <field name="version_ids" options="{'no_create_edit': True}"/>
+            </page>
+            <page string="Description">
+                <field name="mod_description" placeholder="Description"/>
+                <field name="special_circum" />
+            </page>
+            <page string="Internal Notes">
+              <field name="notes" placeholder="Notes"/>
             </page>
             </notebook>
           </sheet>
@@ -66,17 +74,18 @@
       <field name="arch" type="xml">
         <search>
             <field name="mod_name"/>
+            <field name="mod_summary"/>
             <field name="mod_description"/>
             <field name="module_type"/>
-            <field name="project_ids" />
-            <field name="prim_designer_id"/>
+<!--             <field name="project_ids" />
+ -->            <field name="prim_designer_id"/>
             <field name="prim_category_id"/>
-            <field name="customer_ids"/>
-            <field name="prim_developer_id"/>
+<!--             <field name="customer_ids"/>
+ -->            <field name="prim_developer_id"/>
             <field name="contributor_ids"/>
-            <field name="repo_url"/>
-            <field name="rel_date"/>
-            <field name="version_sup_ids"/>
+<!--             <field name="repo_url"/>
+            <field name="rel_date"/> -->
+            <!-- <field name="version_sup_ids"/> -->
             <field name="dependency_ids"/>
             <field name="add_category_ids"/>
             <field name="special_circum"/>
@@ -187,7 +196,11 @@
       <field name="model">module.version</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
+            <field name="name"/>
+            <field name="project_id"/>
+            <field name="customer_id"/>
+            <field name="repo_url" widget="url"/>
+            <field name="rel_date"/>
         </tree>
       </field>
     </record>
@@ -201,8 +214,17 @@
           <group>
           <group col="1">
             <field name="name"/>
+            <field name="project_id"/>
+            <field name="customer_id"/>
+            <field name="repo_url" widget="url"/>
+            <field name="rel_date"/>
           </group>
           </group>
+          <notebook>
+            <page string="Comment">
+                <field name="comment" />
+            </page>
+          </notebook>
           </sheet>
         </form>
       </field>
