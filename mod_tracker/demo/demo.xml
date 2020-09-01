@@ -40,6 +40,19 @@
                 <field name="mod_summary">Inventory</field>
             </record>
 
+            <record id="module4" model="module.tracker">
+                <field name="name">agreement_helpdesk</field>
+                <field name="image" type="base64" file="mod_tracker/static/src/img/demo_icon2.png"/>
+                <field name="module_type">public</field>
+                <field name="prim_designer_id" ref="base.res_partner_address_15"/>
+                <field name="prim_category_id" ref="category2"/>
+                <field name="prim_developer_id" ref="base.res_partner_address_28"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('base.res_partner_address_16'), ref('base.res_partner_address_31')])]"/>
+                <field name="dependency_ids" eval="[(6,0,[ref('dependency1'), ref('dependency2')])]"/>
+                <field name="add_category_ids" eval="[(6,0,[ref('category3'), ref('category1')])]"/>
+                <field name="mod_summary">Link a helpdesk ticket to an agreement</field>
+            </record>
+
         <record id="version1" model="module.tracker.version">
             <field name="name">agreement_rma_11.0</field>
             <field name="module_version_id" ref="module1"/>
@@ -73,20 +86,33 @@
           </record>
           <record id="version5" model="module.tracker.version">
             <field name="name">agreement_helpdesk_12.0-ADD-fieldservice_mobile</field>
-            <field name="module_version_id" ref="module2"/>
+            <field name="module_version_id" ref="module4"/>
             <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0-ADD-fieldservice_mobile/agreement_helpdesk</field>
             <field name="rel_date">2020-08-22</field>
             <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
           </record>
           <record id="version6" model="module.tracker.version">
             <field name="name">agreement_helpdesk_12.0-ADD-fieldservice_tracking</field>
-            <field name="module_version_id" ref="module2"/>
+            <field name="module_version_id" ref="module4"/>
             <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0-ADD-fieldservice_tracking/agreement_helpdesk</field>
             <field name="rel_date">2020-08-21</field>
             <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
           </record>
-          
           <record id="version7" model="module.tracker.version">
+            <field name="name">agreement_helpdesk_11.0</field>
+            <field name="module_version_id" ref="module4"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/11.0/agreement_helpdesk</field>
+            <field name="rel_date">2020-07-21</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
+          </record> 
+          <record id="version8" model="module.tracker.version">
+            <field name="name">agreement_helpdesk_12.0</field>
+            <field name="module_version_id" ref="module4"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/agreement_helpdesk</field>
+            <field name="rel_date">2020-08-15</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
+          </record> 
+          <record id="version9" model="module.tracker.version">
             <field name="name">stock_picking_comment_11.0</field>
             <field name="module_version_id" ref="module3"/>
             <field name="repo_url">https://github.com/ursais/osi-addons/tree/11.0/stock_picking_comment</field>

@@ -13,13 +13,6 @@ class ModuleTracker(models.Model):
         attachment=True,
         help="This field holds the image of the icon, limited to 1024x1024px.",
     )
-    image_medium = fields.Binary(
-        "Medium-sized photo",
-        attachment=True,
-        help="Medium-sized photo of the icon. It is automatically "
-        "resized as a 128x128px image, with aspect ratio preserved. "
-        "Use this field in form views or some kanban views.",
-    )
 
     name = fields.Char(
         string="Module Name", required=(True), track_visibility="always",
@@ -161,3 +154,8 @@ class ModuleVersion(models.Model):
         string="Project",
         track_visibility="always",
     )
+
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(name)", "The Module version already exists"),
+        ("url_unique", "UNIQUE(repo_url)", "The Repository URL already exists"),
+    ]
