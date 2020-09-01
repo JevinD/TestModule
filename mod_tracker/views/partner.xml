@@ -5,12 +5,12 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <notebook position="inside">
-                <page name="mt.employee.page" string="Module Tracker">
+                <page name="mt.employee.page" string="Module Customer">
                     <group>
                         <field name="module_customer_ids"/>
                     </group>
                 </page>
-                <page name="mt.employee.page" string="Employee">
+                <page name="mt.employee.page" string="Module Employee">
                     <group string="Primary Designer" style="color: #355C7D;">
                         <h2>
                             <field name="module_primary_ids"/>

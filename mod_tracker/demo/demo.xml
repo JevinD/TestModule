@@ -2,7 +2,7 @@
   <data noupdate="1">
 
           <record id="module1" model="module.tracker">
-                <field name="mod_name">account_default_payment_method</field>
+                <field name="name">account_default_payment_method</field>
                 <field name="module_type">private</field>
                 <field name="project_id" ref="project.project_project_1"/>
                 <field name="prim_designer_id" ref="hr.employee_niv"/>
@@ -20,7 +20,7 @@
           </record>
           
           <record id="module2" model="module.tracker">
-                <field name="mod_name">agreement_rma</field>
+                <field name="name">agreement_rma</field>
                 <field name="module_type">public</field>
                 <field name="project_id" ref="project.project_project_1"/>
                 <field name="prim_designer_id" ref="hr.employee_niv"/>
@@ -38,7 +38,7 @@
           </record>
 
           <record id="module3" model="module.tracker">
-                <field name="mod_name">agreement_helpdesk</field>
+                <field name="name">agreement_helpdesk</field>
                 <field name="module_type">public</field>
                 <field name="project_id" ref="project.project_project_2"/>
                 <field name="prim_designer_id" ref="hr.employee_qdp"/>
@@ -56,7 +56,7 @@
           </record>
 
           <record id="module4" model="module.tracker">
-                <field name="mod_name">osi_scrap_reason_code</field>
+                <field name="name">osi_scrap_reason_code</field>
                 <field name="module_type">public</field>
                 <field name="project_id" ref="project.project_project_1"/>
                 <field name="prim_designer_id" ref="hr.employee_hne"/>
@@ -74,7 +74,7 @@
           </record>
 
           <record id="module5" model="module.tracker">
-                <field name="mod_name">stock_picking_sms</field>
+                <field name="name">stock_picking_sms</field>
                 <field name="module_type">public</field>
                 <field name="project_id" ref="project.project_project_1"/>
                 <field name="prim_designer_id" ref="hr.employee_fme"/>
@@ -92,7 +92,7 @@
           </record>
 
           <record id="module6" model="module.tracker">
-                <field name="mod_name">sale_subscription_brand</field>
+                <field name="name">sale_subscription_brand</field>
                 <field name="module_type">public</field>
                 <field name="project_id" ref="project.project_project_1"/>
                 <field name="prim_designer_id" ref="hr.employee_hne"/>
