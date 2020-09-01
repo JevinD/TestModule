@@ -141,12 +141,26 @@ class Dependency(models.Model):
 class ModuleVersion(models.Model):
     _name = "module.tracker.version"
     _description = "stores versions of modules"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "rel_date desc"
-    name = fields.Char(string="Module Full Name", required=(True))
-    module_version_id = fields.Many2one("module.tracker", string="Module General Name")
+    name = fields.Char(
+        string="Module Full Name", required=(True), track_visibility="always",
+    )
+    module_version_id = fields.Many2one(
+        "module.tracker", string="Module General Name", track_visibility="always",
+    )
     repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
+    stage = fields.Selection(
+        [
+            ("development", "Development"),
+            ("review", "Review"),
+            ("published", "Published"),
+        ],
+        string="Status",
+        track_visibility="always",
+    )
     rel_date = fields.Date(string="Release Date", track_visibility="always",)
-    comment = fields.Text(string="Comment")
+    comment = fields.Text(string="Comment", track_visibility="always",)
 
     project_ids = fields.Many2many(
         "project.project",

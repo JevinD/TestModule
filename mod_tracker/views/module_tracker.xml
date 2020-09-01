@@ -32,8 +32,13 @@
                                 <h1>
                                     <field name="name" placeholder="Module Name" required="True"/>
                                 </h1>
-                                <field name="module_type" options="{'horizontal': true}" class="oe_edit_only" widget="radio"/>
+                                <group><group>
+                                <field name="module_type" options="{'horizontal': true}" widget="radio"/>
+                                </group></group>
                             </div>
+                            
+                            <notebook>
+                            <page string="General Information">
                             <group>
                                 <group>
                                     <field name="prim_category_id" options="{'no_create_edit': True}"/>
@@ -53,7 +58,7 @@
                                 </h2>
                                 <field name="mod_summary" placeholder="brief statement"/>
                             </group>
-                            <notebook>
+                            </page>
                                 <page string="Module Versions">
                                     <field name="version_ids" options="{'no_create_edit': True}"/>
                                 </page>
@@ -98,22 +103,15 @@
                 <field name="mod_summary"/>
                 <field name="mod_description"/>
                 <field name="module_type"/>
-                <!--             <field name="project_ids" />
- -->
                 <field name="prim_designer_id"/>
                 <field name="prim_category_id"/>
-                <!--             <field name="customer_ids"/>
- -->
                 <field name="prim_developer_id"/>
                 <field name="contributor_ids"/>
-                <!--             <field name="repo_url"/>
-            <field name="rel_date"/> -->
-                <!-- <field name="version_sup_ids"/> -->
                 <field name="dependency_ids"/>
                 <field name="add_category_ids"/>
                 <field name="special_circum"/>
+                <field name="notes"/>            
                 <group string="Group By">
-                    <!-- <filter name="by_customer" string="Customer" context="{'group_by': 'customer_ids'}"/> -->
                     <filter name="by_designer" string="Primary Designer" context="{'group_by': 'prim_designer_id'}"/>
                     <filter name="by_developer" string="Primary Developer" context="{'group_by': 'prim_developer_id'}"/>
                     <filter name="by_category" string="Primary Category" context="{'group_by': 'prim_category_id'}"/>
@@ -216,7 +214,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="repo_url" widget="url"/>
+                <field name="stage"/>
                 <field name="rel_date"/>
             </tree>
         </field>
@@ -234,6 +232,7 @@
                             <field name="module_version_id"/>
                         </group>
                         <group>
+                            <field name="stage" options="{'horizontal': true}" widget="radio"/>
                             <field name="repo_url" widget="url"/>
                             <field name="rel_date"/>
                         </group>
@@ -251,6 +250,10 @@
                         </page>
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
             </form>
         </field>
     </record>
