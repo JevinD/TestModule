@@ -1,112 +1,97 @@
 <odoo>
-  <data noupdate="1">
-
-          <record id="module1" model="module.tracker">
-                <field name="name">account_default_payment_method</field>
-                <field name="module_type">private</field>
-                <field name="project_id" ref="project.project_project_1"/>
-                <field name="prim_designer_id" ref="hr.employee_niv"/>
+  <data noupdate="0">
+            <record id="module1" model="module.tracker">
+                <field name="name">agreement_rma</field>
+                <field name="image" type="base64" file="mod_tracker/static/src/img/demo_icon1.png"/>
+                <field name="module_type">public</field>
+                <field name="prim_designer_id" ref="base.res_partner_address_15"/>
                 <field name="prim_category_id" ref="category1"/>
-                <field name="customer_id" ref="base.res_partner_10"/>
-                <field name="prim_developer_id" ref="hr.employee_stw"/>
-                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_mit'), ref('hr.employee_chs')])]"/>
-                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/account_default_payment_method</field>
+                <field name="prim_developer_id" ref="base.res_partner_address_15"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('base.res_partner_address_28'), ref('base.res_partner_address_16')])]"/>
                 <field name="rel_date">2020-09-3</field>
-                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
                 <field name="dependency_ids" eval="[(6,0,[ref('dependency3'), ref('dependency4')])]"/>
                 <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
-               <field name="special_circum">Beta Stage</field>
-                <field name="mod_description">Store and use the default payment information of a partner</field>
+                <field name="special_circum">Beta Stage</field>
+                <field name="mod_summary">Store and use the default payment information of a partner</field>
+            </record>
+            <record id="module2" model="module.tracker">
+                <field name="name">helpdesk_stock</field>
+                <field name="image" type="base64" file="mod_tracker/static/src/img/demo_icon2.png"/>
+                <field name="module_type">public</field>
+                <field name="prim_designer_id" ref="base.res_partner_address_15"/>
+                <field name="prim_category_id" ref="category2"/>
+                <field name="prim_developer_id" ref="base.res_partner_address_28"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('base.res_partner_address_16'), ref('base.res_partner_address_31')])]"/>
+                <field name="dependency_ids" eval="[(6,0,[ref('dependency1'), ref('dependency2')])]"/>
+                <field name="add_category_ids" eval="[(6,0,[ref('category3'), ref('category1')])]"/>
+                <field name="mod_summary">Inventory and Stock Operations for Helpdesk Tickets</field>
+            </record>
+
+            <record id="module3" model="module.tracker">
+                <field name="name">stock_picking_comment</field>
+                <field name="image" type="base64" file="mod_tracker/static/src/img/demo_icon3.png"/>
+                <field name="module_type">public</field>
+                <field name="prim_designer_id" ref="base.res_partner_address_15"/>
+                <field name="prim_category_id" ref="category5"/>
+                <field name="prim_developer_id" ref="base.res_partner_address_28"/>
+                <field name="contributor_ids" eval="[(6,0,[ref('base.res_partner_address_16'), ref('base.res_partner_address_31')])]"/>
+                <field name="dependency_ids" eval="[(6,0,[ref('dependency1'), ref('dependency2')])]"/>
+                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category1')])]"/>
+                <field name="mod_summary">Inventory</field>
+            </record>
+
+        <record id="version1" model="module.tracker.version">
+            <field name="name">agreement_rma_11.0</field>
+            <field name="module_version_id" ref="module1"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/11.0/agreement_rma</field>
+            <field name="rel_date">2020-08-14</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_2')])]"/>
+          </record>
+
+          <record id="version2" model="module.tracker.version">
+            <field name="name">agreement_rma_12.0</field>
+            <field name="module_version_id" ref="module1"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/agreement_rma</field>
+            <field name="rel_date">2020-08-20</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_1')])]"/>
+
+          </record>
+          <record id="version3" model="module.tracker.version">
+            <field name="name">helpdesk_stock_11.0</field>
+            <field name="module_version_id" ref="module2"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/11.0/helpdesk_stock</field>
+            <field name="rel_date">2020-08-02</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
+          </record>
+
+          <record id="version4" model="module.tracker.version">
+            <field name="name">helpdesk_stock_12.0</field>
+            <field name="module_version_id" ref="module2"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/helpdesk_stock</field>
+            <field name="rel_date">2020-08-20</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
+          </record>
+          <record id="version5" model="module.tracker.version">
+            <field name="name">agreement_helpdesk_12.0-ADD-fieldservice_mobile</field>
+            <field name="module_version_id" ref="module2"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0-ADD-fieldservice_mobile/agreement_helpdesk</field>
+            <field name="rel_date">2020-08-22</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
+          </record>
+          <record id="version6" model="module.tracker.version">
+            <field name="name">agreement_helpdesk_12.0-ADD-fieldservice_tracking</field>
+            <field name="module_version_id" ref="module2"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0-ADD-fieldservice_tracking/agreement_helpdesk</field>
+            <field name="rel_date">2020-08-21</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_1'), ref('project.project_project_2')])]"/>
           </record>
           
-          <record id="module2" model="module.tracker">
-                <field name="name">agreement_rma</field>
-                <field name="module_type">public</field>
-                <field name="project_id" ref="project.project_project_1"/>
-                <field name="prim_designer_id" ref="hr.employee_niv"/>
-                <field name="prim_category_id" ref="category4"/>
-                <field name="customer_id" ref="base.res_partner_12"/>
-                <field name="prim_developer_id" ref="hr.employee_stw"/>
-                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_qdp'), ref('hr.employee_fme')])]"/>
-                <field name="repo_url">https://github.com/ursais/osi-addons/blob/12.0/agreement_rma/</field>
-                <field name="rel_date">2020-08-14</field>
-                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
-                <field name="dependency_ids" eval="[(6,0,[ref('dependency1'), ref('dependency2')])]"/>
-                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category1')])]"/>
-               <!-- <field name="special_circum"></field> -->
-                <field name="mod_description">Link rma orders to an agreement</field>
-          </record>
-
-          <record id="module3" model="module.tracker">
-                <field name="name">agreement_helpdesk</field>
-                <field name="module_type">public</field>
-                <field name="project_id" ref="project.project_project_2"/>
-                <field name="prim_designer_id" ref="hr.employee_qdp"/>
-                <field name="prim_category_id" ref="category4"/>
-                <field name="customer_id" ref="base.res_partner_12"/>
-                <field name="prim_developer_id" ref="hr.employee_fme"/>
-                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_fpi'), ref('hr.employee_jth')])]"/>
-                <field name="repo_url">https://github.com/ursais/osi-addons/blob/12.0/agreement_helpdesk</field>
-                <field name="rel_date">2020-08-14</field>
-                <field name="version_sup_ids" eval="[(6,0,[ref('version10'), ref('version11')])]"/>
-                <field name="dependency_ids" eval="[(6,0,[ref('dependency1'), ref('dependency2')])]"/>
-                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category1')])]"/>
-               <!-- <field name="special_circum"></field> -->
-                <field name="mod_description">Link a helpdesk ticket to an agreement</field>
-          </record>
-
-          <record id="module4" model="module.tracker">
-                <field name="name">osi_scrap_reason_code</field>
-                <field name="module_type">public</field>
-                <field name="project_id" ref="project.project_project_1"/>
-                <field name="prim_designer_id" ref="hr.employee_hne"/>
-                <field name="prim_category_id" ref="category1"/>
-                <field name="customer_id" ref="base.res_partner_10"/>
-                <field name="prim_developer_id" ref="hr.employee_hne"/>
-                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_mit'), ref('hr.employee_chs')])]"/>
-                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/osi_scrap_reason_code</field>
-                <field name="rel_date">2020-09-3</field>
-                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
-                <field name="dependency_ids" eval="[(6,0,[ref('dependency2'), ref('dependency3')])]"/>
-                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
-               <!-- <field name="special_circum">Beta Stage</field> -->
-                <field name="mod_description">Provide a user-defined list of scrapping reasons</field>
-          </record>
-
-          <record id="module5" model="module.tracker">
-                <field name="name">stock_picking_sms</field>
-                <field name="module_type">public</field>
-                <field name="project_id" ref="project.project_project_1"/>
-                <field name="prim_designer_id" ref="hr.employee_fme"/>
-                <field name="prim_category_id" ref="category1"/>
-                <field name="customer_id" ref="base.res_partner_10"/>
-                <field name="prim_developer_id" ref="hr.employee_fme"/>
-                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_hne'), ref('hr.employee_chs')])]"/>
-                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/stock_picking_sms</field>
-                <field name="rel_date">2020-09-3</field>
-                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
-                <field name="dependency_ids" eval="[(6,0,[ref('dependency1'), ref('dependency2')])]"/>
-                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
-               <!-- <field name="special_circum">Beta Stage</field> -->
-                <!-- <field name="mod_description"></field> -->
-          </record>
-
-          <record id="module6" model="module.tracker">
-                <field name="name">sale_subscription_brand</field>
-                <field name="module_type">public</field>
-                <field name="project_id" ref="project.project_project_1"/>
-                <field name="prim_designer_id" ref="hr.employee_hne"/>
-                <field name="prim_category_id" ref="category1"/>
-                <field name="customer_id" ref="base.res_partner_10"/>
-                <field name="prim_developer_id" ref="hr.employee_hne"/>
-                <field name="contributor_ids" eval="[(6,0,[ref('hr.employee_mit'), ref('hr.employee_chs')])]"/>
-                <field name="repo_url">https://github.com/ursais/osi-addons/tree/12.0/picking_sms</field>
-                <field name="rel_date">2020-09-3</field>
-                <field name="version_sup_ids" eval="[(6,0,[ref('version11'), ref('version12')])]"/>
-                <field name="dependency_ids" eval="[(6,0,[ref('dependency2'), ref('dependency4')])]"/>
-                <field name="add_category_ids" eval="[(6,0,[ref('category2'), ref('category3')])]"/>
-               <!-- <field name="special_circum">Beta Stage</field> -->
-                <!-- <field name="mod_description"></field> -->
+          <record id="version7" model="module.tracker.version">
+            <field name="name">stock_picking_comment_11.0</field>
+            <field name="module_version_id" ref="module3"/>
+            <field name="repo_url">https://github.com/ursais/osi-addons/tree/11.0/stock_picking_comment</field>
+            <field name="rel_date">2020-08-10</field>
+            <field name="project_ids" eval="[(6,0,[ref('project.project_project_2')])]"/>
           </record>
   </data>
 </odoo>

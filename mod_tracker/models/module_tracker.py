@@ -1,7 +1,6 @@
-from odoo import fields, models, api, exceptions, tools, _
+from odoo import fields, models, api, exceptions, _
 from datetime import timedelta
 from odoo.modules.module import get_module_resource
-import base64
 
 
 class ModuleTracker(models.Model):

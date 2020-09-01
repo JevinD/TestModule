@@ -23,7 +23,8 @@
         "views/module_tracker.xml",
         "views/partner.xml",
         "views/project.xml",
-        # "data/module_tracker_data.xml",
+        "data/module_tracker_data.xml",
+        "demo/demo.xml",
     ],
     # only loaded in demonstration mode
     # "demo": ["demo/demo.xml",],
