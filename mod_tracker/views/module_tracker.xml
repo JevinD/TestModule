@@ -49,7 +49,7 @@
                                     <group>
                                         <group >
                                             <field name="add_category_ids" widget="many2many_tags" 
-                                            options="{'no_create_edit': True}" placeholder="Non-Primary Categories"/>
+                                                options="{'no_create_edit': True}" placeholder="Non-Primary Categories"/>
                                             <field name="special_circum"/>
                                         </group>
 
@@ -229,7 +229,7 @@
                                     <field name="prim_designer_id" options="{'no_create_edit': True}"/>
                                     <field name="prim_developer_id" options="{'no_create_edit': True}"/>
                                     <field name="contributor_ids" widget="many2many_tags" 
-                                    options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
+                                        options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
                                 </group>
                                 <group>
                                     <field name="rel_date"/>
@@ -239,9 +239,9 @@
                             </group>
                         </page>
                         <page string="Projects">
-                        <h2>
+                            <h2>
                             Projects
-                        </h2>
+                            </h2>
                             <field name="project_ids">
                                 <tree>
                                     <field name="name"/>
@@ -305,24 +305,40 @@
     </record>
     <!--________________________________Top menu item____________________________________-->
 
-    <menuitem id="module_tracker_menu_root" name="Module Tracker"  
-        web_icon ="mod_tracker,static/description/icon.png" sequence="0"/>
+    <menuitem id="module_tracker_menu_root" 
+        name="Module Tracker"  
+        web_icon ="mod_tracker,static/description/icon.png" 
+        sequence="0"/>
 
     <!-- menu categories -->
-    <menuitem id="module_tracker_menu_module" name="Module Tracker" 
-    parent="module_tracker_menu_root" action="action_module_tracker" sequence="1"/>
+    <menuitem id="module_tracker_menu_module" 
+        name="Module Tracker" 
+        parent="module_tracker_menu_root" 
+        action="action_module_tracker" 
+        sequence="1"/>
 
-    <menuitem id="module_tracker_menu_version" name="Module Versions" 
-    parent="module_tracker_menu_root" action="action_module_tracker_version" sequence="2"/>
+    <menuitem id="module_tracker_menu_version" 
+        name="Module Versions" 
+        parent="module_tracker_menu_root" 
+        action="action_module_tracker_version" 
+        sequence="2"/>
 
-    <menuitem id="module_tracker_menu_config" name="Configuration" 
-    parent="module_tracker_menu_root" sequence="5"/>
+    <menuitem id="module_tracker_menu_config" 
+        name="Configuration" 
+        parent="module_tracker_menu_root" 
+        sequence="5"/>
 
     <!-- sub-menu actions -->
-    <menuitem id="module_tracker_menu_category" name="Categories" 
-    parent="module_tracker_menu_config" action="action_module_tracker_category" sequence="1"/>
+    <menuitem id="module_tracker_menu_category" 
+        name="Categories" 
+        parent="module_tracker_menu_config" 
+        action="action_module_tracker_category" 
+        sequence="1"/>
 
-    <menuitem id="module_tracker_menu_depend" name="Dependencies" 
-    parent="module_tracker_menu_config" action="action_module_tracker_depend" sequence="2"/>
-    
+    <menuitem id="module_tracker_menu_depend" 
+        name="Dependencies" 
+        parent="module_tracker_menu_config" 
+        action="action_module_tracker_depend" 
+        sequence="2"/>
+
 </odoo>
