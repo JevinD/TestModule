@@ -1,5 +1,5 @@
 <odoo>
-  <data noupdate="0">
+  <data noupdate="1">
             <record id="module1" model="module.tracker">
                 <field name="name">agreement_rma</field>
                 <field name="image" type="base64" file="mod_tracker/static/src/img/demo_icon1.png"/>
