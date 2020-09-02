@@ -97,6 +97,7 @@ class ModuleVersion(models.Model):
     _description = "stores versions of modules"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "rel_date desc"
+
     name_id = fields.Many2one(
         "module.tracker", string="Module Name", track_visibility="always",
     )
@@ -115,6 +116,7 @@ class ModuleVersion(models.Model):
     rel_date = fields.Date(string="Release Date", track_visibility="always",)
     comment = fields.Text(string="Comment", track_visibility="always",)
 
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS!
     project_ids = fields.Many2many(
         "project.project",
         ondelete="cascade",
