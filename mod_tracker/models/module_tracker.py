@@ -35,36 +35,6 @@ class ModuleTracker(models.Model):
         ("name_unique", "UNIQUE(name)", "The Module Name must be unique")
     ]
 
-    prim_designer_id = fields.Many2one(
-        "res.partner",
-        ondelete="cascade",
-        string="Primary Designer",
-        track_visibility="always",
-    )
-
-    prim_developer_id = fields.Many2one(
-        "res.partner",
-        ondelete="cascade",
-        string="Primary Developer",
-        track_visibility="always",
-    )
-
-    # NOTE: OE_CHATTER DOES NOT TRACK THIS!
-    contributor_ids = fields.Many2many(
-        "res.partner",
-        string="Contributors",
-        track_visibility="onchange",
-        help="Additional Developers, Designers and Contributors can be listed here",
-    )
-
-    # NOTE: OE_CHATTER DOES NOT TRACK THIS
-    dependency_ids = fields.Many2many(
-        "module.depend",
-        string="Dependencies",
-        track_visibility="onchange",
-        help="located in the __manifest__.py file",
-    )
-
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
     add_category_ids = fields.Many2many(
         "module.category", string="Additional Categories", track_visibility="always",
@@ -165,4 +135,33 @@ class ModuleVersion(models.Model):
         ondelete="cascade",
         string="Project",
         track_visibility="always",
+    )
+    prim_designer_id = fields.Many2one(
+        "res.partner",
+        ondelete="cascade",
+        string="Primary Designer",
+        track_visibility="always",
+    )
+
+    prim_developer_id = fields.Many2one(
+        "res.partner",
+        ondelete="cascade",
+        string="Primary Developer",
+        track_visibility="always",
+    )
+
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS!
+    contributor_ids = fields.Many2many(
+        "res.partner",
+        string="Contributors",
+        track_visibility="onchange",
+        help="Additional Developers, Designers and Contributors can be listed here",
+    )
+
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
+    dependency_ids = fields.Many2many(
+        "module.depend",
+        string="Dependencies",
+        track_visibility="onchange",
+        help="located in the __manifest__.py file",
     )
