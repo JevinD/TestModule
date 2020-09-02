@@ -14,9 +14,7 @@ class ModuleTracker(models.Model):
         help="This field holds the image of the icon, limited to 1024x1024px.",
     )
 
-    name = fields.Char(
-        string="Module Name", required=(True), track_visibility="always",
-    )
+    name = fields.Char(string="Modu Name", required=(True), track_visibility="always",)
 
     active = fields.Boolean(string="Active?", default=True)
 
@@ -49,7 +47,7 @@ class ModuleTracker(models.Model):
         track_visibility="always",
     )
 
-    # NOTE: OE_CHATTER DOES NOT TRACK THIS
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS!
     contributor_ids = fields.Many2many(
         "res.partner",
         string="Contributors",
