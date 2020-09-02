@@ -192,8 +192,8 @@
         <field name="model">module.tracker.version</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="module_version_id"/>
-                <field name="name"/>
+                <field name="name_id"/>
+                <field name="version"/>
                 <field name="stage"/>
                 <field name="rel_date"/>
             </tree>
@@ -212,13 +212,13 @@
                         </button>
                     </div>
                     <div class="oe_title">
-                        <label for="module_version_id"/>
+                        <label for="name_id"/>
                         <h1>
-                            <field name="module_version_id"/>
+                            <field name="name_id"/>
                         </h1>
-                        <label for="name"/>
+                        <label for="version"/>
                         <h2>
-                            <field name="name" placeholder="Version" required="True"/>
+                            <field name="version" placeholder="Version" required="True"/>
                         </h2>
                     </div>
                     <notebook>
@@ -271,8 +271,8 @@
         <field name="model">module.tracker.version</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
-                <field name="module_version_id"/>
+                <field name="name_id"/>
+                <field name="version"/>
                 <field name="active"/>
                 <field name="stage"/>
                 <field name="prim_designer_id"/>
@@ -286,7 +286,8 @@
                 <group string="Group By">
                     <filter name="by_designer" string="Primary Designer" context="{'group_by': 'prim_designer_id'}"/>
                     <filter name="by_developer" string="Primary Developer" context="{'group_by': 'prim_developer_id'}"/>
-                    <filter name="by_name" string="Module Name" context="{'group_by': 'module_version_id'}"/>
+                    <filter name="by_name" string="Module Name" context="{'group_by': 'name_id'}"/>
+                    <filter name="by_stage" string="Status" context="{'group_by': 'stage'}"/>
                 </group>
             </search>
         </field>

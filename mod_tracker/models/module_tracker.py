@@ -43,7 +43,7 @@ class ModuleTracker(models.Model):
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
     version_ids = fields.One2many(
         "module.tracker.version",
-        "module_version_id",
+        "name_id",
         string="Module Versions",
         track_visibility="always",
         help="located in the __manifest__.py file",
@@ -97,10 +97,10 @@ class ModuleVersion(models.Model):
     _description = "stores versions of modules"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "rel_date desc"
-    name = fields.Char(string="Version", required=(True), track_visibility="always",)
-    module_version_id = fields.Many2one(
+    name_id = fields.Many2one(
         "module.tracker", string="Module Name", track_visibility="always",
     )
+    version = fields.Char(string="Version", required=(True), track_visibility="always",)
     active = fields.Boolean(string="Active?", default=True, track_visibility="always",)
     repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
     stage = fields.Selection(
