@@ -34,51 +34,33 @@
                                 </h1>
                                 <group><group>
                                 <field name="module_type" options="{'horizontal': true}" widget="radio"/>
+                                <field name="prim_category_id" options="{'no_create_edit': True}"/>
                                 </group></group>
                             </div>
-                            
-                            <notebook>
-                            <page string="General Information">
-                            <group>
-                                <group>
-                                    <field name="prim_category_id" options="{'no_create_edit': True}"/>
-                                    <field name="prim_designer_id" options="{'no_create_edit': True}"/>
-                                    <field name="prim_developer_id" options="{'no_create_edit': True}"/>
-                                </group>
-                                <group>
-                                    <field name="contributor_ids" widget="many2many_tags" 
-                                        options="{'no_create_edit': True}" 
-                                        placeholder="Non-Primary Designers, Developers, Contributors"/>
-                                    <field name="dependency_ids" widget="many2many_tags" 
-                                        options="{'no_create_edit': True}"/>
-                                    
-                                </group>
                                 <h2>
                                     Summary
                                 </h2>
                                 <field name="mod_summary" placeholder="brief statement"/>
-                            </group>
-                            </page>
-                                <page string="Module Versions">
-                                    <field name="version_ids" options="{'no_create_edit': True}"/>
-                                </page>
-                                <page string="Additional Info">
-                                    <group colspan="4">
-                                        <group colspan="3">
-                                        <h2>
-                                            Additional Information
-                                        </h2>
+                                
+                            <notebook>
+                            <page string="Additional Info">
+                                    <group>
+                                        <group >
                                             <field name="add_category_ids" widget="many2many_tags" 
                                                 options="{'no_create_edit': True}" placeholder="Non-Primary Categories"/>
                                             <field name="special_circum"/>
                                         </group>
-                                        <h2>
-                                            Description
-                                        </h2>
-
-                                        <field name="mod_description" placeholder="Description"/>
+                                        
                                     </group>
+                                    <h2>
+                                        Description
+                                    </h2>
+                                    <field name="mod_description" placeholder="Description"/>
                                 </page>
+                                <page string="Module Versions">
+                                    <field name="version_ids" options="{'no_create_edit': True}"/>
+                                </page>
+                                
                                 <page string="Internal Notes">
                                     <field name="notes" placeholder="Notes"/>
                                 </page>
@@ -103,18 +85,13 @@
                 <field name="mod_summary"/>
                 <field name="mod_description"/>
                 <field name="module_type"/>
-                <field name="prim_designer_id"/>
                 <field name="prim_category_id"/>
-                <field name="prim_developer_id"/>
-                <field name="contributor_ids"/>
-                <field name="dependency_ids"/>
                 <field name="add_category_ids"/>
                 <field name="special_circum"/>
                 <field name="notes"/>            
                 <group string="Group By">
-                    <filter name="by_designer" string="Primary Designer" context="{'group_by': 'prim_designer_id'}"/>
-                    <filter name="by_developer" string="Primary Developer" context="{'group_by': 'prim_developer_id'}"/>
                     <filter name="by_category" string="Primary Category" context="{'group_by': 'prim_category_id'}"/>
+                    <filter name="by_type" string="Module Type" context="{'group_by': 'module_type'}"/>
                 </group>
             </search>
         </field>
@@ -213,6 +190,7 @@
         <field name="model">module.tracker.version</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="module_version_id"/>
                 <field name="name"/>
                 <field name="stage"/>
                 <field name="rel_date"/>
@@ -226,25 +204,50 @@
         <field name="arch" type="xml">
             <form string="Module Version">
                 <sheet>
-                    <group>
-                        <group col="1">
-                            <field name="name"/>
-                            <field name="module_version_id"/>
-                        </group>
-                        <group>
-                            <field name="stage" options="{'horizontal': true}" widget="radio"/>
-                            <field name="repo_url" widget="url"/>
-                            <field name="rel_date"/>
-                        </group>
-                    </group>
+                <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                                <label for="module_version_id" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="module_version_id"/>
+                                </h1>
+                                <label for="name" class="oe_edit_only"/>
+                                <h2>
+                                    <field name="name" placeholder="Version" required="True"/>
+                                </h2>
+                            </div>       
                     <notebook>
+                            <page string="General Information">
+                            <group>
+                                <group>
+                                    <field name="stage" options="{'horizontal': true}" widget="radio"/>
+                                    <field name="prim_designer_id" options="{'no_create_edit': True}"/>
+                                    <field name="prim_developer_id" options="{'no_create_edit': True}"/>
+                                     <field name="contributor_ids" widget="many2many_tags" 
+                                        options="{'no_create_edit': True}" 
+                                        placeholder="Non-Primary Designers, Developers, Contributors"/>
+                                </group>
+                                <group>
+                                    <field name="rel_date"/>
+                                    <field name="repo_url" widget="url"/>
+                                    <field name="dependency_ids" widget="many2many_tags" 
+                                        options="{'no_create_edit': True}"/>
+                                </group>
+                            </group>
+                            </page>
                         <page string="Projects">
-                            <field name="project_ids"/>
+                            <field name="project_ids">
+                                <tree>
+                                </tree>
+                                </field>
                         </page>
                         <page string="Comment">
                             <group colspan="4">
                                 <group colspan="3">
-                                    <field name="comment" />
+                                    <field name="comment"/>
                                 </group>
                             </group>
                         </page>
@@ -255,6 +258,32 @@
                     <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
                 </div>
             </form>
+        </field>
+    </record>
+
+    <record id="view_module_tracker_version_search" model="ir.ui.view">
+        <field name="name">module.tracker.version.search</field>
+        <field name="model">module.tracker.version</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="module_version_id"/>
+                <field name="active"/>
+                <field name="stage"/>
+                <field name="prim_designer_id"/>
+                <field name="prim_developer_id"/>
+                <field name="contributor_ids"/>
+                <field name="rel_date"/>
+                <field name="repo_url"/>
+                <field name="dependency_ids"/>
+                <field name="comment"/>
+                <field name="project_ids"/>
+                <group string="Group By">
+                    <filter name="by_designer" string="Primary Designer" context="{'group_by': 'prim_designer_id'}"/>
+                    <filter name="by_developer" string="Primary Developer" context="{'group_by': 'prim_developer_id'}"/>
+                    <filter name="by_name" string="Module Name" context="{'group_by': 'module_version_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

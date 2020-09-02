@@ -18,7 +18,7 @@ class ModuleTracker(models.Model):
         string="Module Name", required=(True), track_visibility="always",
     )
 
-    active = fields.Boolean(string="Active?", default=True)
+    active = fields.Boolean(string="Active?", default=True, track_visibility="always",)
 
     mod_summary = fields.Text(string="Summary", track_visibility="always",)
 
@@ -115,8 +115,9 @@ class ModuleVersion(models.Model):
     _order = "rel_date desc"
     name = fields.Char(string="Version", required=(True), track_visibility="always",)
     module_version_id = fields.Many2one(
-        "module.tracker", string="Module General Name", track_visibility="always",
+        "module.tracker", string="Module Name", track_visibility="always",
     )
+    active = fields.Boolean(string="Active?", default=True, track_visibility="always",)
     repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
     stage = fields.Selection(
         [
