@@ -30,6 +30,6 @@ class TestMtCases(TransactionCase):
     # change name
     def test_mt_update(self):
         self.mod_tracker.prim_category_id = self.category.id
-        self.mod_tracker.mod_name = "name change"
-        self.assertEqual(self.mod_tracker.mod_name, "name change")
+        self.mod_tracker.name = "name change"
+        self.assertEqual(self.mod_tracker.name, "name change")
         self.assertEqual(self.mod_tracker.prim_category_id.name, "category")
