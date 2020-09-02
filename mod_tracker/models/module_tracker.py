@@ -143,9 +143,7 @@ class ModuleVersion(models.Model):
     _description = "stores versions of modules"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "rel_date desc"
-    name = fields.Char(
-        string="Module Full Name", required=(True), track_visibility="always",
-    )
+    name = fields.Char(string="Version", required=(True), track_visibility="always",)
     module_version_id = fields.Many2one(
         "module.tracker", string="Module General Name", track_visibility="always",
     )
@@ -168,8 +166,3 @@ class ModuleVersion(models.Model):
         string="Project",
         track_visibility="always",
     )
-
-    _sql_constraints = [
-        ("name_unique", "UNIQUE(name)", "The Module version already exists"),
-        ("url_unique", "UNIQUE(repo_url)", "The Repository URL already exists"),
-    ]

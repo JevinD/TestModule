@@ -1,5 +1,5 @@
-<odoo>    
-    <record id="view_res_partner_tracker_form" model="ir.ui.view" >
+<odoo>
+    <record id="view_res_partner_tracker_form" model="ir.ui.view">
         <field name="name">res.partner.tracker.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
@@ -21,7 +21,7 @@
                             <field name="module_primary_dev_ids"/>
                         </h2>
                     </group>
-                    <group  style="color: #C06C84;" string="Contributed">
+                    <group style="color: #C06C84;" string="Contributor">
                         <h2>
                             <field name="module_contributor_ids"/>
                         </h2>
