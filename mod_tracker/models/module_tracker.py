@@ -65,22 +65,6 @@ class ModuleTracker(models.Model):
                     "Primary Category can not be used in additional categories"
                 )
 
-    @api.constrains("prim_developer_id", "contributor_ids")
-    def _check_prim_developer_not_in_add_contributors(self):
-        for rec in self:
-            if rec.prim_developer_id and rec.prim_developer_id in rec.contributor_ids:
-                raise exceptions.ValidationError(
-                    "Primary Developer can not be used in additional contributors/developers"
-                )
-
-    @api.constrains("prim_designer_id", "contributor_ids")
-    def _check_prim_designer_not_in_add_contributors(self):
-        for rec in self:
-            if rec.prim_designer_id and rec.prim_designer_id in rec.contributor_ids:
-                raise exceptions.ValidationError(
-                    "Primary Designer can not be used in additional contributors/developers"
-                )
-
 
 class Category(models.Model):
     _name = "module.category"
@@ -166,3 +150,19 @@ class ModuleVersion(models.Model):
         track_visibility="onchange",
         help="located in the __manifest__.py file",
     )
+
+    @api.constrains("prim_developer_id", "contributor_ids")
+    def _check_prim_developer_not_in_add_contributors(self):
+        for rec in self:
+            if rec.prim_developer_id and rec.prim_developer_id in rec.contributor_ids:
+                raise exceptions.ValidationError(
+                    "Primary Developer can not be used in additional contributors/developers"
+                )
+
+    @api.constrains("prim_designer_id", "contributor_ids")
+    def _check_prim_designer_not_in_add_contributors(self):
+        for rec in self:
+            if rec.prim_designer_id and rec.prim_designer_id in rec.contributor_ids:
+                raise exceptions.ValidationError(
+                    "Primary Designer can not be used in additional contributors/developers"
+                )

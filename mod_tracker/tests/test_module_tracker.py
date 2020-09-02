@@ -13,13 +13,13 @@ class TestMtCases(TransactionCase):
 
         # create a module tracker instance
         self.mod_tracker = self.env["module.tracker"].create(
-            {"mod_name": "name", "mod_description": "description",}
+            {"name": "name", "mod_summary": "summary",}
         )
 
     # check if module name and description set properly
     def test_mt_creation(self):
-        self.assertEqual(self.mod_tracker.mod_name, "name")
-        self.assertEqual(self.mod_tracker.mod_description, "description")
+        self.assertEqual(self.mod_tracker.name, "name")
+        self.assertEqual(self.mod_tracker.mod_description, "summary")
 
     # unlink the record and check if it exists. it should not exists.
     def test_mt_delete(self):
