@@ -11,7 +11,7 @@ class SchoolStudent(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Student Table"
 
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(string="Names", required=True)
     age = fields.Integer(string="Age", default="18", required=True)
     guardian = fields.Selection(
         [("dad", "Dad"), ("mom", "Mom"),], string="Guardian", required=True
