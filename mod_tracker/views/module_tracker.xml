@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-       
-    <record id="view_module_tracker_tree" model="ir.ui.view" >
+
+    <record id="view_module_tracker_tree" model="ir.ui.view">
         <field name="name">module.tracker.tree</field>
         <field name="model">module.tracker</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="mod_name"/>
+                <field name="name"/>
                 <field name="prim_category_id"/>
-                <field name="project_id"/>
                 <field name="module_type"/>
             </tree>
         </field>
@@ -20,77 +19,108 @@
         <field name="arch" type="xml">
             <form string="Module Information">
                 <sheet>
-                    <group string= "Module Name">
-                        <group>
-                            <h2>
-                            <field name="mod_name" placeholder="Module Name" />
-                            </h2>
-                        </group>
-                    </group>
-                    <group>
-                        <group>
-                            <field name="module_type"/>
-                            <field name="project_id"  options="{'no_create_edit': True}"/>
-                            <field name="prim_category_id" options="{'no_create_edit': True}"/>
-                            <field name="customer_id" options="{'no_create_edit': True}"/>
-                            <field name="prim_designer_id" options="{'no_create_edit': True}"/>
-                            <field name="prim_developer_id" options="{'no_create_edit': True}"/>
-                            <field name="mod_description" placeholder="Summary"/>
-                        </group>
-                        <group>
-                            <field name="contributor_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Designers, Developers, Contributors"/>
-                            <field name="repo_url" widget="url"/>
-                            <field name="rel_date"/>
-                            <field name="version_sup_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
-                            <field name="dependency_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
-                            <field name="add_category_ids" widget="many2many_tags" options="{'no_create_edit': True}" placeholder="Non-Primary Categories"/>
-                            <field name="special_circum" />
-                        </group>
-                    </group>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <div id="o_module_container">
+                        <div id="o_module_main">
+                            <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image"}'/>
+                            <div class="oe_title">
+                                <label for="name" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="name" placeholder="Module Name" required="True"/>
+                                </h1>
+                                <group><group>
+                                <field name="module_type" options="{'horizontal': true}" widget="radio"/>
+                                </group></group>
+                            </div>
+                            
+                            <notebook>
+                            <page string="General Information">
+                            <group>
+                                <group>
+                                    <field name="prim_category_id" options="{'no_create_edit': True}"/>
+                                    <field name="prim_designer_id" options="{'no_create_edit': True}"/>
+                                    <field name="prim_developer_id" options="{'no_create_edit': True}"/>
+                                </group>
+                                <group>
+                                    <field name="contributor_ids" widget="many2many_tags" 
+                                        options="{'no_create_edit': True}" 
+                                        placeholder="Non-Primary Designers, Developers, Contributors"/>
+                                    <field name="dependency_ids" widget="many2many_tags" 
+                                        options="{'no_create_edit': True}"/>
+                                    
+                                </group>
+                                <h2>
+                                    Summary
+                                </h2>
+                                <field name="mod_summary" placeholder="brief statement"/>
+                            </group>
+                            </page>
+                                <page string="Module Versions">
+                                    <field name="version_ids" options="{'no_create_edit': True}"/>
+                                </page>
+                                <page string="Additional Info">
+                                    <group colspan="4">
+                                        <group colspan="3">
+                                        <h2>
+                                            Additional Information
+                                        </h2>
+                                            <field name="add_category_ids" widget="many2many_tags" 
+                                                options="{'no_create_edit': True}" placeholder="Non-Primary Categories"/>
+                                            <field name="special_circum"/>
+                                        </group>
+                                        <h2>
+                                            Description
+                                        </h2>
+
+                                        <field name="mod_description" placeholder="Description"/>
+                                    </group>
+                                </page>
+                                <page string="Internal Notes">
+                                    <field name="notes" placeholder="Notes"/>
+                                </page>
+                            </notebook>
+                        </div>
+                    </div>
                 </sheet>
                 <div class="oe_chatter">
-                <field name="message_follower_ids" widget="mail_followers"/>
-                <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
                 </div>
             </form>
         </field>
     </record>
 
-    <record id="view_module_tracker_search" model="ir.ui.view" >
+    <record id="view_module_tracker_search" model="ir.ui.view">
         <field name="name">module.tracker.search</field>
         <field name="model">module.tracker</field>
         <field name="arch" type="xml">
             <search>
-                <field name="mod_name"/>
+                <field name="name"/>
+                <field name="mod_summary"/>
                 <field name="mod_description"/>
                 <field name="module_type"/>
-                <field name="project_id" />
                 <field name="prim_designer_id"/>
                 <field name="prim_category_id"/>
-                <field name="customer_id"/>
                 <field name="prim_developer_id"/>
                 <field name="contributor_ids"/>
-                <field name="repo_url"/>
-                <field name="rel_date"/>
-                <field name="version_sup_ids"/>
                 <field name="dependency_ids"/>
                 <field name="add_category_ids"/>
                 <field name="special_circum"/>
+                <field name="notes"/>            
                 <group string="Group By">
-                    <filter name="by_customer" string="Customer"
-                            context="{'group_by': 'customer_id'}"/>
-                    <filter name="by_designer" string="Primary Designer"
-                            context="{'group_by': 'prim_designer_id'}"/>  
-                    <filter name="by_developer" string="Primary Developer"
-                            context="{'group_by': 'prim_developer_id'}"/>
-                    <filter name="by_category" string="Primary Category"
-                            context="{'group_by': 'prim_category_id'}"/>
+                    <filter name="by_designer" string="Primary Designer" context="{'group_by': 'prim_designer_id'}"/>
+                    <filter name="by_developer" string="Primary Developer" context="{'group_by': 'prim_developer_id'}"/>
+                    <filter name="by_category" string="Primary Category" context="{'group_by': 'prim_category_id'}"/>
                 </group>
             </search>
         </field>
     </record>
 
-    <record id="action_module_tracker" model="ir.actions.act_window" >
+    <record id="action_module_tracker" model="ir.actions.act_window">
         <field name="name">Module Tracker</field>
         <field name="res_model">module.tracker</field>
         <field name="view_mode">tree,form</field>
@@ -99,10 +129,10 @@
             Add a Module
             </p>
         </field>
-    </record>  
+    </record>
     <!-- Configuration -->
     <!--  Category -->
-    <record id="view_module_tracker_category_tree" model="ir.ui.view" >
+    <record id="view_module_tracker_category_tree" model="ir.ui.view">
         <field name="name">module.tracker.category.tree</field>
         <field name="model">module.category</field>
         <field name="arch" type="xml">
@@ -119,16 +149,16 @@
             <form string="Categories">
                 <sheet>
                     <group>
-                    <group col="1">
-                        <field name="name" />
-                    </group>
+                        <group col="1">
+                            <field name="name" />
+                        </group>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="action_module_tracker_category" model="ir.actions.act_window" >
+    <record id="action_module_tracker_category" model="ir.actions.act_window">
         <field name="name">Category Types</field>
         <field name="res_model">module.category</field>
         <field name="view_mode">tree,form</field>
@@ -140,7 +170,7 @@
     </record>
 
     <!-- Dependenies -->
-    <record id="view_module_tracker_depend_tree" model="ir.ui.view" >
+    <record id="view_module_tracker_depend_tree" model="ir.ui.view">
         <field name="name">module.tracker.depend.tree</field>
         <field name="model">module.depend</field>
         <field name="arch" type="xml">
@@ -158,44 +188,6 @@
                 <sheet>
                     <group>
                         <group col="1">
-                                <field name="name"/>
-                        </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="action_module_tracker_depend" model="ir.actions.act_window" >
-        <field name="name">Dependencies</field>
-        <field name="res_model">module.depend</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-            Add a Dependency
-            </p>
-        </field>
-    </record>  
-
-<!-- versions support -->
-    <record id="view_module_tracker_version_tree" model="ir.ui.view" >
-        <field name="name">module.tracker.version.tree</field>
-        <field name="model">module.version</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_module_tracker_version_form" model="ir.ui.view">
-        <field name="name">module.tracker.version.form</field>
-        <field name="model">module.version</field>
-        <field name="arch" type="xml">
-            <form string="Version number">
-                <sheet>
-                    <group>
-                        <group col="1">
                             <field name="name"/>
                         </group>
                     </group>
@@ -204,49 +196,95 @@
         </field>
     </record>
 
-    <record id="action_module_tracker_version" model="ir.actions.act_window" >
-        <field name="name">Version numbers</field>
-        <field name="res_model">module.version</field>
+    <record id="action_module_tracker_depend" model="ir.actions.act_window">
+        <field name="name">Dependencies</field>
+        <field name="res_model">module.depend</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-            Add a Version number
+            Add a Dependency
             </p>
         </field>
-    </record>  
-<!--________________________________Top menu item____________________________________-->
+    </record>
 
-    <menuitem id="module_tracker_menu_root"
-        name="Module Tracker"  
-        web_icon ="mod_tracker,static/description/icon.png" 
-        sequence="0"/>
+    <!-- versions support -->
+    <record id="view_module_tracker_version_tree" model="ir.ui.view">
+        <field name="name">module.tracker.version.tree</field>
+        <field name="model">module.tracker.version</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="stage"/>
+                <field name="rel_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_module_tracker_version_form" model="ir.ui.view">
+        <field name="name">module.tracker.version.form</field>
+        <field name="model">module.tracker.version</field>
+        <field name="arch" type="xml">
+            <form string="Module Version">
+                <sheet>
+                    <group>
+                        <group col="1">
+                            <field name="name"/>
+                            <field name="module_version_id"/>
+                        </group>
+                        <group>
+                            <field name="stage" options="{'horizontal': true}" widget="radio"/>
+                            <field name="repo_url" widget="url"/>
+                            <field name="rel_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Projects">
+                            <field name="project_ids"/>
+                        </page>
+                        <page string="Comment">
+                            <group colspan="4">
+                                <group colspan="3">
+                                    <field name="comment" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_module_tracker_version" model="ir.actions.act_window">
+        <field name="name">Module Versions</field>
+        <field name="res_model">module.tracker.version</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a Module Version
+            </p>
+        </field>
+    </record>
+    <!--________________________________Top menu item____________________________________-->
+
+    <menuitem id="module_tracker_menu_root" name="Module Tracker"  
+        web_icon ="mod_tracker,static/description/icon.png" sequence="0"/>
 
     <!-- menu categories -->
-    <menuitem id="module_tracker_menu_module" 
-        name="Module Finder" 
-        parent="module_tracker_menu_root"
-        action="action_module_tracker"
-        sequence="1"/>
-    
-    <menuitem id="module_tracker_menu_config" 
-        name="Configuration" 
-        parent="module_tracker_menu_root"
-        sequence="4"/>
+    <menuitem id="module_tracker_menu_module" name="Module Finder" 
+        parent="module_tracker_menu_root" action="action_module_tracker" sequence="1"/>
+
+    <menuitem id="module_tracker_menu_config" name="Configuration" 
+        parent="module_tracker_menu_root" sequence="4"/>
 
     <!-- sub-menu actions -->
-    <menuitem id="module_tracker_menu_category" 
-        name="Categories" 
-        parent="module_tracker_menu_config"
-        action="action_module_tracker_category"
-        sequence="1"/>
-    <menuitem id="module_tracker_menu_depend" 
-        name="Dependencies" 
-        parent="module_tracker_menu_config"
-        action="action_module_tracker_depend"
-        sequence="2"/>
-    <menuitem id="module_tracker_menu_version" 
-        name="Versions" 
-        parent="module_tracker_menu_config"
-        action="action_module_tracker_version"
-        sequence="3"/>
+    <menuitem id="module_tracker_menu_category" name="Categories" 
+        parent="module_tracker_menu_config" action="action_module_tracker_category" sequence="1"/>
+    <menuitem id="module_tracker_menu_depend" name="Dependencies" 
+        parent="module_tracker_menu_config" action="action_module_tracker_depend" sequence="2"/>
+    <menuitem id="module_tracker_menu_version" name="Module Versions" 
+        parent="module_tracker_menu_config" action="action_module_tracker_version" sequence="3"/>
 </odoo>

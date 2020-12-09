@@ -1,69 +1,62 @@
 from odoo import fields, models, api, exceptions, _
 from datetime import timedelta
+from odoo.modules.module import get_module_resource
 
 
 class ModuleTracker(models.Model):
     _name = "module.tracker"
     _description = "Keeps track of OSI public and private modules"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _rec_name = "mod_name"
-    mod_name = fields.Char(
+
+    image = fields.Binary(
+        "Photo",
+        attachment=True,
+        help="This field holds the image of the icon, limited to 1024x1024px.",
+    )
+
+    name = fields.Char(
         string="Module Name", required=(True), track_visibility="always",
     )
-    mod_description = fields.Text(
-        string="Summary",
-        track_visibility="always",
-        help="located in the __manifest__.py file under summary",
+
+    active = fields.Boolean(string="Active?", default=True)
+
+    mod_summary = fields.Text(string="Summary", track_visibility="always",)
+
+    prim_category_id = fields.Many2one(
+        "module.category", string="Primary Category", track_visibility="always",
     )
     module_type = fields.Selection(
         [("public", "Public"), ("private", "Private")],
         string="Module Type",
         track_visibility="always",
     )
-    repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
-    rel_date = fields.Date(string="Release Date", track_visibility="always",)
 
-    customer_id = fields.Many2one(
-        "res.partner",
-        ondelete="set null",
-        string="Customer",
-        track_visibility="always",
-        domain="[('is_company','=','True'),('customer', '=', 'True')]",
-    )
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(name)", "The Module Name must be unique")
+    ]
 
-    project_id = fields.Many2one(
-        "project.project",
-        ondelete="cascade",
-        string="Project",
-        required=(True),
-        track_visibility="always",
-    )
-    # NOTE: OE_CHATTER DOES NOT TRACK THIS
-    version_sup_ids = fields.Many2many(
-        "module.version",
-        string="Supported Versions",
-        track_visibility="always",
-        help="located in the __manifest__.py file",
-    )
     prim_designer_id = fields.Many2one(
-        "hr.employee",
+        "res.partner",
         ondelete="cascade",
         string="Primary Designer",
         track_visibility="always",
     )
+
     prim_developer_id = fields.Many2one(
-        "hr.employee",
+        "res.partner",
         ondelete="cascade",
         string="Primary Developer",
         track_visibility="always",
     )
+
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
     contributor_ids = fields.Many2many(
-        "hr.employee",
+        "res.partner",
         string="Contributors",
         track_visibility="onchange",
         help="Additional Developers, Designers and Contributors can be listed here",
     )
+
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
     dependency_ids = fields.Many2many(
         "module.depend",
@@ -71,21 +64,28 @@ class ModuleTracker(models.Model):
         track_visibility="onchange",
         help="located in the __manifest__.py file",
     )
-    special_circum = fields.Char(string="Special Cases", track_visibility="always",)
 
-    prim_category_id = fields.Many2one(
-        "module.category", string="Primary Category", track_visibility="always",
-    )
     # NOTE: OE_CHATTER DOES NOT TRACK THIS
     add_category_ids = fields.Many2many(
         "module.category", string="Additional Categories", track_visibility="always",
     )
 
-    @api.onchange("project_id")
-    def _onchange_from_project(self):
-        for rec in self:
-            if rec.project_id:
-                rec.customer_id = rec.project_id.partner_id
+    # NOTE: OE_CHATTER DOES NOT TRACK THIS
+    version_ids = fields.One2many(
+        "module.tracker.version",
+        "module_version_id",
+        string="Module Versions",
+        track_visibility="always",
+        help="located in the __manifest__.py file",
+    )
+
+    mod_description = fields.Text(
+        string="Description",
+        track_visibility="always",
+        help="located in the __manifest__.py file under description",
+    )
+    notes = fields.Text(string="Notes")
+    special_circum = fields.Char(string="Special Cases", track_visibility="always",)
 
     @api.constrains("prim_category_id", "add_category_ids")
     def _check_prim_category_not_in_add_categories(self):
@@ -118,7 +118,7 @@ class Category(models.Model):
 
     name = fields.Char(string="Category Name", required=(True))
 
-    module_category_ids = fields.One2many("module.tracker", "prim_category_id",)
+    module_category_ids = fields.Many2many("module.tracker",)
 
     _sql_constraints = [
         ("name_unique", "UNIQUE(name)", "The Category Name must be unique"),
@@ -138,20 +138,31 @@ class Dependency(models.Model):
     ]
 
 
-class SupportedVersion(models.Model):
-    _name = "module.version"
-    _description = "stores version numbers for no repeating of version numbers"
+class ModuleVersion(models.Model):
+    _name = "module.tracker.version"
+    _description = "stores versions of modules"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _order = "rel_date desc"
+    name = fields.Char(string="Version", required=(True), track_visibility="always",)
+    module_version_id = fields.Many2one(
+        "module.tracker", string="Module General Name", track_visibility="always",
+    )
+    repo_url = fields.Char(string="Github Repo Url", track_visibility="always",)
+    stage = fields.Selection(
+        [
+            ("development", "Development"),
+            ("review", "Review"),
+            ("published", "Published"),
+        ],
+        string="Status",
+        track_visibility="always",
+    )
+    rel_date = fields.Date(string="Release Date", track_visibility="always",)
+    comment = fields.Text(string="Comment", track_visibility="always",)
 
-    name = fields.Float(string="Dependency version", required=(True))
-
-    module_version_ids = fields.One2many("module.tracker", "version_sup_ids")
-
-    _sql_constraints = [
-        ("name_unique", "UNIQUE(name)", "The Version must be unique"),
-    ]
-
-    @api.constrains("name")
-    def _check_version_not_negative(self):
-        for r in self:
-            if r.name < 0:
-                raise exceptions.ValidationError("version number can not be negative")
+    project_ids = fields.Many2many(
+        "project.project",
+        ondelete="cascade",
+        string="Project",
+        track_visibility="always",
+    )
